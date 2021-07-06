@@ -1,41 +1,20 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-06 15:26:29
+ * @LastEditTime : 2021-07-06 16:51:27
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
   <div class="flex-col mt-4">
-    <div class="border-2 p-4">
-      <div class="flex">
-        <img class="w-16 h-16 flex-none" src="../assets/logo.png" alt="" />
-        <div class="flex-row pl-2 text-left">
-          <div>
-            <span class="text-lg text-left font-bold">name</span>
-          </div>
-          <div>
-            <span class="text-lg text-left">release</span>
-          </div>
-        </div>
-      </div>
-      <div class="flex">
-        <span class="text-left">
-          This is some text. This is some text. This is some text. This is some
-          text. This is some text. This is some text. This is some text. This is
-          some text. This is some text.
-        </span>
-      </div>
-      <div class="flex space-x-2 justify-items-start">
-        <a href="" class="border-1 rounded-md"><span class="text-purple-500 text-lg font-bold">#</span>123</a>
-        <a href="" class="border-1 rounded-md"><span class="text-purple-500 text-lg font-bold">#</span>123</a>
-      </div>
-    </div>
+    <SinglePost img="../assets/logo.png" imgAlt="" name="ABC" intro="me" content="thisthisthisthis" label="123"/>
+
   </div>
 </template>
 
 <script>
+// import SinglePost from './components/SinglePost.vue'
 export default {};
 </script>
 
