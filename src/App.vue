@@ -1,5 +1,5 @@
 <template>
-<div class="block">
+<div class="relative">
   <NavBar/>
   <Banner/>
   <Contents/>
