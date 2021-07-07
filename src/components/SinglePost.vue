@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-07 11:22:18
+ * @LastEditTime : 2021-07-07 16:17:08
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -27,14 +27,14 @@
       </div>
     </div>
     <div class="flex">
-      <span class="text-left pt-2 font-serif">
+      <span class="text-left pt-2 font-serif" style="text-indent: 2em">
         {{ content }}
       </span>
     </div>
-    <div class="flex space-x-2 justify-items-start">
-      <a :href="labelHref" class="border-1 rounded-md">
+    <div class="flex space-x-2 pt-2 justify-items-start">
+      <a v-for="label in labels" :key="label.name" :href="label.href" class="border-1 rounded-md">
         <span class="text-purple-500 text-lg font-bold">#</span
-        >{{ label }}
+        >{{ label.name }}
       </a>
     </div>
   </div>
@@ -42,6 +42,6 @@
 
 <script>
 export default {
-  props: ["img","imgAlt","name","intro","content","labelHref","label"]
+  props: ["img","imgAlt","name","intro","content","labels"]
 };
 </script>
