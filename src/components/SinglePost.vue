@@ -1,13 +1,13 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-08 09:24:16
+ * @LastEditTime : 2021-07-08 11:00:55
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
 
 <template>
-  <div class="border-t-2 shadow-sm bg-gray-50 p-4">
+  <div class="bg-gray-50 shadow-md p-4 rounded-xl m-2">
     <div class="flex flex-row relative">
       <img class="w-12 h-12 rounded-2xl flex-none" :src="img" :alt="imgAlt" />
       <div class="flex-row px-4 text-left text-md">
