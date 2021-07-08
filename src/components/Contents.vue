@@ -1,20 +1,20 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-07 16:26:53
+ * @LastEditTime : 2021-07-08 09:25:29
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
   <div class="flex-col mt-4">
-    <SinglePost v-for="post in posts" :key="post.name" v-bind="post" />
+    <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
   </div>
 </template>
 
 <script>
 import SinglePost from "./SinglePost.vue";
-import API from "./api.vue"
+import API from "../utils/API.vue";
 
 export default {
   components: {
@@ -33,7 +33,7 @@ export default {
         this.posts = response.data.posts;
         })
       .catch((error) => console.log(error));
-  },
+  }
 };
 </script>
 
