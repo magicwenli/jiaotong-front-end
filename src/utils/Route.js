@@ -10,6 +10,7 @@ const About = { template: '<div>About</div>' }
 // 我们后面再讨论嵌套路由。
 const routes = [
     { path: '/', component: Home },
+    { path: '/latest', component: Home },
     { path: '/about', component: About },
 ]
 
