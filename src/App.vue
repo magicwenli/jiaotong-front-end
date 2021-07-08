@@ -2,9 +2,9 @@
   <div class="relative">
     <NavBar @open-login="openLogin" />
     <transition name="mybox">
-      <!-- <div :class="{shake: shake}"> -->
-        <Login v-show="showLogin" />
-      <!-- </div> -->
+      <div v-show="showLogin" :class="{shake: shake}">
+        <Login />
+      </div>
     </transition>
     <Banner />
     <Contents />
@@ -46,14 +46,16 @@ export default {
   color: #2c3e50;
 }
 
-.mybox-leave-active,.mybox-enter-active {
-    transition: all 1s ease;
+.mybox-enter-active,
+.mybox-leave-active {
+  /* transition: opacity 0.5s ease; */
+  transition: all 0.4s;
 }
-.mybox-leave-active,.mybox-enter {
-    height:0px !important ;
-}
-.mybox-leave,.mybox-enter-active {
-    height: 281px ;
+
+.mybox-enter-from,
+.mybox-leave-to {
+  opacity: 0;
+  transform: translateX(-281px);
 }
 
 .shake {
