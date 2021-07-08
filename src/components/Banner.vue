@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:09:40
- * @LastEditTime : 2021-07-08 10:53:50
+ * @LastEditTime : 2021-07-08 11:24:24
  * @Description  :  
  * @FilePath     : /front-end/src/components/Banner.vue
 -->
@@ -12,7 +12,7 @@
     <div
       v-for="label in labels"
       :key="label.id"
-      class="flex-none border-b-2 border-green-500 text-gray-900 px-4 pt-4 pb-2 h-full"
+      class="flex-none text-gray-900 px-4 p-4 h-full"
     >
       <router-link :to="label.url" @click="makeActive(label.id)" class="tracking-wider">
         {{ label.name }}

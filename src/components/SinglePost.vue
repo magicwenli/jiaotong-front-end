@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-08 11:00:55
+ * @LastEditTime : 2021-07-08 11:22:43
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -40,6 +40,20 @@
         <span class="text-purple-500 text-lg font-bold">#</span>{{ label.name }}
       </a>
     </div>
+    <div class="flex pt-2 space-x-2">
+        <a class="flex-1 rounded-3xl bg-green-100 ">
+          <i class="far fa-thumbs-up"></i>
+          <span>&ensp;123</span>
+        </a>
+        <a class="flex-1 rounded-3xl bg-green-100">
+          <i class="far fa-thumbs-down"></i>
+          <span>&ensp;456</span>
+        </a>
+        <a class="flex-1 rounded-3xl bg-green-100">
+          <i class="fas fa-reply"></i>
+          <span>&ensp;789</span>
+        </a>
+      </div>
   </div>
 </template>
 
