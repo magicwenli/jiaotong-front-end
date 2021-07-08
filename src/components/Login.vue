@@ -1,14 +1,14 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-08 17:29:42
+ * @LastEditTime : 2021-07-08 19:14:57
  * @Description  : 
- * @FilePath     : /front-end/src/components/Login.Vue
+ * @FilePath     : /front-end/src/components/Login.vue
 -->
 
 
 <template>
-  <div class="flex items-center justify-center mt-4 bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+  <div class="flex items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-4">
       <div class="flex-initial">
         <h2 class="text-center text-2xl font-extrabold text-gray-900">
