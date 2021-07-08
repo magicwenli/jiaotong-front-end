@@ -1,13 +1,13 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-08 09:25:29
+ * @LastEditTime : 2021-07-08 10:04:01
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
-  <div class="flex-col mt-4">
+  <div class="flex-col">
     <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
   </div>
 </template>

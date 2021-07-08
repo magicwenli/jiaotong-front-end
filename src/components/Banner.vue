@@ -1,24 +1,24 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:09:40
- * @LastEditTime : 2021-07-08 09:22:21
+ * @LastEditTime : 2021-07-08 10:06:34
  * @Description  :  
  * @FilePath     : /front-end/src/components/Banner.vue
 -->
 <template>
   <nav
     @click.prevent
-    class="flex flex-row px-4 -py-2 flex-nowrap overflow-scroll"
-  >
-    <a
+    class="flex flex-row flex-nowrap overflow-scroll">
+    <div
       v-for="label in labels"
       :key="label.id"
       :href="label.url"
-      @click="makeActive(label.id)"
-      class="flex-none active:bg-green-300 active:text-white px-4"
+      class="flex-none border-b-2 border-green-500 text-gray-900 px-4 pt-4 pb-2 h-full"
     >
-      {{ label.name }}
-    </a>
+      <a @click="makeActive(label.id)" class="tracking-wider">
+        {{ label.name }}
+      </a>
+    </div>
   </nav>
 </template>
 
