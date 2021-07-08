@@ -6,6 +6,8 @@
         <Login />
       </div>
     </transition>
+    <Signup/>
+    <SignupCheck/>
     <Banner />
     <Contents />
   </div>
@@ -16,10 +18,13 @@ import NavBar from "./components/NavBar.vue";
 import Banner from "./components/Banner.vue";
 import Contents from "./components/Contents.vue";
 import Login from "./components/Login.vue";
+import Signup from "./components/Signup.vue";
+import SignupCheck from "./components/SignupCheck.vue";
+
 // import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  components: { NavBar, Banner, Contents, Login },
+  components: { NavBar, Banner, Contents, Login,Signup,SignupCheck },
   data() {
     return {
       showLogin: false,
