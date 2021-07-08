@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 10:28:20
- * @LastEditTime : 2021-07-08 10:03:53
+ * @LastEditTime : 2021-07-08 18:18:03
  * @Description  : 
  * @FilePath     : /front-end/src/components/NavBar.vue
 -->
@@ -17,7 +17,7 @@
       <a href="#" class="flex-grow mx-2 py-3 no-underline border-b-2 border-transparent tracking-wide ">
         <span class="text-green-600">JiaoTong</span>
       </a>
-      <a href="#" class="mr-4 py-3 no-underline border-b-2 border-transparent tracking-wide ">
+      <a @click="$emit('openLogin')" class="mr-4 py-3 no-underline border-b-2 border-transparent tracking-wide">
         <i class="fa fa-user-circle"></i>
         <span class="pl-2">我的</span>
       </a>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-
+  emits: ['openLogin']
 }
 </script>
 
