@@ -1,8 +1,10 @@
 <template>
 <div class="relative">
   <NavBar/>
+  <Login/>
   <Banner/>
   <Contents/>
+  
 </div>
 </template>
 
@@ -10,7 +12,7 @@
 import NavBar from './components/NavBar.vue'
 import Banner from './components/Banner.vue'
 import Contents from './components/Contents.vue'
-
+import Login from "./components/Login.vue";
 // import HelloWorld from './components/HelloWorld.vue'
 
 

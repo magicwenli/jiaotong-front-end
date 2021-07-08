@@ -8,5 +8,7 @@ module.exports = {
     backgroundColor: ['active'],
     textColor: ['active'],
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }
