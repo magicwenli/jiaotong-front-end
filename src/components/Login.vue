@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-08 19:14:57
+ * @LastEditTime : 2021-07-09 09:21:21
  * @Description  : 
  * @FilePath     : /front-end/src/components/Login.vue
 -->
@@ -44,7 +44,7 @@
             <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
               忘记密码
             </a>&emsp;
-            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a @click="$emit('showSignup')" class="font-medium text-indigo-600 hover:text-indigo-500">
               注册账户
             </a>
           </div>
@@ -63,5 +63,6 @@
 <script>
 export default {
   components: {},
+  emits:['showSignup']
 };
 </script>

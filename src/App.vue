@@ -1,13 +1,16 @@
 <template>
   <div class="relative">
-    <NavBar @open-login="openLogin" />
-    <transition name="mybox">
+    <NavBar @open-login="unfold" />
+    <transition name="mybox" mode="out-in">
       <div v-show="showLogin" :class="{shake: shake}">
-        <Login />
+        <Login @show-signup="openSignup" />
       </div>
     </transition>
-    <Signup/>
-    <SignupCheck/>
+    <transition name="mybox" mode="out-in">
+      <div v-show="showSignup" :class="{shake: shake}">
+        <Signup />
+      </div>
+    </transition>
     <Banner />
     <Contents />
   </div>
@@ -24,16 +27,28 @@ import SignupCheck from "./components/SignupCheck.vue";
 // import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  components: { NavBar, Banner, Contents, Login,Signup,SignupCheck },
+  components: { NavBar, Banner, Contents, Login, Signup, SignupCheck },
   data() {
     return {
       showLogin: false,
+      showSignup: false,
+      showSignupCheck: false,
       shake: false,
     };
   },
   methods: {
-    openLogin() {
+    unfold(){
+      if (!this.showLogin && !this.showSignup) {
+        this.showLogin=true;
+      } else{
+        this.showLogin= false;
+        this.showSignup=false;
+      }
+    },
+    openSignup(){
+      console.log("showSignup");
       this.showLogin = !this.showLogin;
+      this.showSignup=!this.showSignup;
     },
   },
 };
