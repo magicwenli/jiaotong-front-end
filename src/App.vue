@@ -11,6 +11,7 @@
         <Signup />
       </div>
     </transition>
+    <Post/>
     <Banner />
     <Contents />
   </div>
@@ -23,11 +24,13 @@ import Contents from "./components/Contents.vue";
 import Login from "./components/Login.vue";
 import Signup from "./components/Signup.vue";
 import SignupCheck from "./components/SignupCheck.vue";
+import Post from "./components/Post.vue";
+
 
 // import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  components: { NavBar, Banner, Contents, Login, Signup, SignupCheck },
+  components: { NavBar, Banner, Contents, Login, Signup, SignupCheck ,Post},
   data() {
     return {
       showLogin: false,
@@ -46,7 +49,7 @@ export default {
       }
     },
     openSignup(){
-      console.log("showSignup");
+      // console.log("showSignup");
       this.showLogin = !this.showLogin;
       this.showSignup=!this.showSignup;
     },
