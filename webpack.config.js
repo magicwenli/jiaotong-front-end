@@ -15,11 +15,13 @@ module.exports = {
                     {
                         loader: "less-loader",
                         options: {
+                            javascriptEnabled: true,
                             lessOptions: {
                                 strictMath: true,
-                                modifyVars: getThemeVariables({
-                                    dark: true, // Enable dark mode
-                                })
+                                modifyVars: {
+                                    'primary-color': '#fff',
+                                    'link-color': '#fff',
+                                }
                             },
                         },
 },
