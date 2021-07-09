@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-09 21:38:42
+ * @LastEditTime : 2021-07-09 23:08:52
  * @Description  : 
  * @FilePath     : /front-end/src/components/Login.vue
 -->
@@ -10,43 +10,37 @@
 <template>
   <Base>
   <template v-slot:default>
-    <form class="mt-6 space-y-4" action="#" method="POST">
-      <input type="hidden" name="remember" value="true" />
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div>
-          <label for="email-address" class="sr-only">Email address</label>
-          <input id="email-address" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" />
-        </div>
-        <div>
-          <label for="password" class="sr-only">Password</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-          <label for="remember-me" class="ml-2 block text-sm text-gray-900">
-            记住我
-          </label>
-        </div>
-
+    <a-form name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
+      <a-form-item label="邮箱" name="email">
+        <a-input v-model:value="formState.email" type="email" autocomplete="off">
+          <template #addonAfter>
+            <a-select v-model:value="formState.emailAddon" style="width: 160px">
+              <a-select-option value="@stu.xjtu.edu.cn">@stu.xjtu.edu.cn</a-select-option>
+              <a-select-option value="@mail.xjtu.edu.cn">@mail.xjtu.edu.cn</a-select-option>
+            </a-select>
+          </template>
+        </a-input>
+      </a-form-item>
+      <a-form-item label="密码" name="pass">
+        <a-input-password v-model:value="formState.pass" type="password" autocomplete="off" />
+      </a-form-item>
+      <a-form-item>
+        <div class="flex items-center justify-between">
+        <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
         <div class="text-sm">
-          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-            忘记密码
-          </a>&emsp;
-          <a @click="$emit('showSignup')" class="font-medium text-indigo-600 hover:text-indigo-500">
-            注册账户
-          </a>
-        </div>
-      </div>
-
-      <div>
-        <a-button type="primary" class="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white">
-          登录
-        </a-button>
-      </div>
-    </form>
+            <router-link to="/" class="font-medium">
+              忘记密码
+            </router-link>&emsp;
+            <router-link to="/signup" class="font-medium">
+              注册账户
+            </router-link>
+          </div> 
+        </div>     
+      </a-form-item>
+      <a-form-item>
+        <a-button class="w-full mt-4" type="primary" html-type="submit">登录</a-button>
+      </a-form-item>
+    </a-form>
   </template>
   </Base>
 </template>
@@ -54,8 +48,85 @@
 <script>
 import Base from "./_Base.vue";
 
-export default {
+import { defineComponent, reactive, ref } from "vue";
+export default defineComponent({
+  setup() {
+    const formRef = ref();
+    const formState = reactive({
+      email: "",
+      pass: "",
+      emailAddon: "@stu.xjtu.edu.cn",
+      remember: false,
+    });
+
+    let validatePass = async (rule, value) => {
+      if (value === "") {
+        return Promise.reject("请输入密码");
+      } else {
+        return Promise.resolve();
+      }
+    };
+
+    let validateEmail = async (rule, value) => {
+      // let patt =
+      //   /^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$/;
+      // let checkEmail = value.search(patt);
+      if (value === "") {
+        return Promise.reject("请输入邮箱");
+      } else {
+        return Promise.resolve();
+      }
+    };
+
+    const rules = {
+      pass: [
+        {
+          // required: true,
+          validator: validatePass,
+          trigger: "change",
+        },
+      ],
+      email: [
+        {
+          validator: validateEmail,
+          // required:true,
+          trigger: "change",
+          // pattern: "^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$"
+        },
+      ],
+    };
+    const layout = {
+      labelCol: {
+        span: 4,
+      },
+      wrapperCol: {
+        span: 10,
+      },
+    };
+
+    const handleFinish = (values) => {
+      console.log(values, formState);
+      // TODO 加密方式？
+    };
+
+    const handleFinishFailed = (errors) => {
+      console.log(errors);
+    };
+
+    return {
+      formState,
+      formRef,
+      rules,
+      layout,
+      handleFinishFailed,
+      handleFinish,
+    };
+  },
   components: { Base },
-  emits: ["showSignup"],
-};
+});
+
+// export default {
+//   components: { Base },
+//   emits: ["showSignup"],
+// };
 </script>

@@ -5,20 +5,14 @@
         <Login @show-signup="openSignup" />
       </div>
     </transition>
-    <transition name="mybox" mode="out-in">
-      <div v-show="showSignup" :class="{shake: shake}">
-        <Signup />
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
 import Login from '../components/Login.vue';
-import Signup from '../components/Signup.vue';
 
 export default {
-  components: { Login, Signup },
+  components: { Login },
   data() {
     return {
       showLogin: true,
