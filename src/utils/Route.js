@@ -6,6 +6,8 @@ import ShuDong from '../views/ShuDong.vue';
 import My from '../views/My.vue';
 import Post from '../views/Post.vue';
 import SignUp from '../views/SignUp.vue';
+import Login from '../views/Login.vue';
+
 
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
@@ -15,6 +17,8 @@ const routes = [
     { path: '/post', component: Post },
     { path: '/my', component: My },
     { path: '/signup', component: SignUp },
+    { path: '/login', component: Login },
+
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

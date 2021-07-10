@@ -1,4 +1,5 @@
 <template>
+<!-- 如果用户没有登录，应跳转到Login。 否则显示My。 -->
   <div>
     <transition name="mybox" mode="out-in">
       <div v-show="showLogin" :class="{shake: shake}">
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import Login from '../components/Login.vue';
+import Login from './Login.vue';
 
 export default {
   components: { Login },
