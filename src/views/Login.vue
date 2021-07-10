@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-10 10:22:46
+ * @LastEditTime : 2021-07-10 14:46:25
  * @Description  : 
  * @FilePath     : /front-end/src/views/Login.vue
 -->
@@ -9,48 +9,26 @@
 
 <template>
   <Base>
-  <template v-slot:default>
-    <a-form name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
-      <a-form-item name="email">
-        <a-input v-model:value="formState.email" type="text" autocomplete="off" placeholder="邮箱">
-        <template #prefix><MailOutlined style="color: rgba(0, 0, 0, 0.5)" /></template>
-          <template #addonAfter>
-            <a-select v-model:value="formState.emailAddon" style="width: 160px">
-              <a-select-option value="@stu.xjtu.edu.cn">@stu.xjtu.edu.cn</a-select-option>
-              <a-select-option value="@mail.xjtu.edu.cn">@mail.xjtu.edu.cn</a-select-option>
-            </a-select>
-          </template>
-        </a-input>
-      </a-form-item>
-      <a-form-item name="pass">
-        <a-input v-model:value="formState.pass" type="password" autocomplete="off" placeholder="密码">
-        <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.5)" /></template>
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <div class="flex items-center justify-between">
-        <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
-        <div class="text-sm">
-            <router-link to="/" class="font-medium">
-              忘记密码
-            </router-link>&emsp;
-            <router-link to="/signup" class="font-medium">
-              注册账户
-            </router-link>
-          </div> 
-        </div>     
-      </a-form-item>
-      <a-form-item>
-        <a-button class="w-full mt-2" type="primary" html-type="submit">登录</a-button>
-      </a-form-item>
-    </a-form>
-  </template>
+    <template #default>
+      <el-input
+        placeholder="请输入内容"
+        v-model="input3"
+        class="input-with-select"
+      >
+        <template #prepend>
+          <el-select v-model="select" placeholder="请选择">
+            <el-option label="餐厅名" value="1"></el-option>
+            <el-option label="订单号" value="2"></el-option>
+            <el-option label="用户电话" value="3"></el-option>
+          </el-select>
+        </template>
+      </el-input>
+    </template>
   </Base>
 </template>
 
 <script>
 import Base from "./_Base.vue";
-import { LockOutlined, MailOutlined } from '@ant-design/icons-vue';
 import { defineComponent, reactive, ref } from "vue";
 export default defineComponent({
   setup() {
@@ -126,9 +104,7 @@ export default defineComponent({
     };
   },
   components: {
-    Base,
-    LockOutlined,
-    MailOutlined,
+    Base
   },
 });
 

@@ -28,7 +28,7 @@
 	},
 	"vetur.format.options.tabSize": 2,
   	"vetur.format.options.useTabs": false,
-	"vetur.format.defaultFormatter.html": "js-beautify-html",
+	"vetur.format.defaultFormatter.html": "prettier",
 	"vetur.format.defaultFormatterOptions": {
 	"prettier": {
 		// Prettier option here
