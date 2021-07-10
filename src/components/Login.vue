@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-09 23:08:52
+ * @LastEditTime : 2021-07-10 09:47:16
  * @Description  : 
  * @FilePath     : /front-end/src/components/Login.vue
 -->
@@ -11,8 +11,9 @@
   <Base>
   <template v-slot:default>
     <a-form name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
-      <a-form-item label="邮箱" name="email">
-        <a-input v-model:value="formState.email" type="email" autocomplete="off">
+      <a-form-item name="email">
+        <a-input v-model:value="formState.email" type="email" autocomplete="off" placeholder="邮箱">
+        <template #prefix><MailOutlined style="color: rgba(0, 0, 0, 0.5)" /></template>
           <template #addonAfter>
             <a-select v-model:value="formState.emailAddon" style="width: 160px">
               <a-select-option value="@stu.xjtu.edu.cn">@stu.xjtu.edu.cn</a-select-option>
@@ -21,8 +22,10 @@
           </template>
         </a-input>
       </a-form-item>
-      <a-form-item label="密码" name="pass">
-        <a-input-password v-model:value="formState.pass" type="password" autocomplete="off" />
+      <a-form-item name="pass">
+        <a-input v-model:value="formState.pass" type="password" autocomplete="off" placeholder="密码">
+        <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.5)" /></template>
+        </a-input>
       </a-form-item>
       <a-form-item>
         <div class="flex items-center justify-between">
@@ -47,7 +50,7 @@
 
 <script>
 import Base from "./_Base.vue";
-
+import { LockOutlined, MailOutlined } from '@ant-design/icons-vue';
 import { defineComponent, reactive, ref } from "vue";
 export default defineComponent({
   setup() {
@@ -122,7 +125,11 @@ export default defineComponent({
       handleFinish,
     };
   },
-  components: { Base },
+  components: {
+    Base,
+    LockOutlined,
+    MailOutlined,
+  },
 });
 
 // export default {
