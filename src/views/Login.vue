@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-10 09:49:34
+ * @LastEditTime : 2021-07-10 10:22:46
  * @Description  : 
  * @FilePath     : /front-end/src/views/Login.vue
 -->
@@ -12,7 +12,7 @@
   <template v-slot:default>
     <a-form name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
       <a-form-item name="email">
-        <a-input v-model:value="formState.email" type="email" autocomplete="off" placeholder="邮箱">
+        <a-input v-model:value="formState.email" type="text" autocomplete="off" placeholder="邮箱">
         <template #prefix><MailOutlined style="color: rgba(0, 0, 0, 0.5)" /></template>
           <template #addonAfter>
             <a-select v-model:value="formState.emailAddon" style="width: 160px">
@@ -41,7 +41,7 @@
         </div>     
       </a-form-item>
       <a-form-item>
-        <a-button class="w-full mt-4" type="primary" html-type="submit">登录</a-button>
+        <a-button class="w-full mt-2" type="primary" html-type="submit">登录</a-button>
       </a-form-item>
     </a-form>
   </template>

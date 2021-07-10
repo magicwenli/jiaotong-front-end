@@ -1,57 +1,191 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 19:46:02
- * @LastEditTime : 2021-07-09 14:37:10
+ * @LastEditTime : 2021-07-10 10:22:25
  * @Description  : 
- * @FilePath     : /front-end/src/components/Signup.vue
+ * @FilePath     : /front-end/src/views/Signup.vue
 -->
 
 <template>
-  <div class="flex items-center justify-center bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-4">
-      <div class="flex-initial">
-        <h2 class="text-center text-2xl font-extrabold text-gray-900">
-          <a class="fas fa-user-plus" />&ensp;
-          注册
-        </h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
-          Welcome
-        </p>
-      </div>
-      <form class="mt-6 space-y-4" action="#" method="POST">
-        <input type="hidden" name="remember" value="true" />
-        <div class="rounded-md shadow-sm -space-y-px">
-          <div>
-            <label for="email-address" class="sr-only">Email address</label>
-            <input id="su-email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" />
-          </div>
-          <div>
-            <label for="password" class="sr-only">Password</label>
-            <input id="su-password" name="password" type="password" autocomplete="current-password" required minlength="8" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
-          </div>
-          <div>
-            <label for="password" class="sr-only">Retype Password</label>
-            <input id="su-re-password" name="re-password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Retype Password" />
-          </div>
-        </div>
+  <Base>
+  <template v-slot:headline>
+    <a class="fas fa-user-plus" />&ensp;
+    注册
+  </template>
+  <template v-slot:tips>
+    目前仅接受部分邮箱注册。
+  </template>
 
-        <div class="mt-2">
-          <label for="nickname" class="sr-only">Nickname</label>
-          <input id="su-nickname" name="nickname" type="text" autocomplete="nickname" minlength="2" maxlength="10" required class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Nickname" />
-        </div>
+  <template v-slot:default>
+    <a-form name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
+      <a-form-item name="email">
+        <a-input v-model:value="formState.email" type="text" autocomplete="off" placeholder="邮箱">
+          <template #prefix>
+            <MailOutlined style="color: rgba(0, 0, 0, 0.5)" />
+          </template>
+          <template #addonAfter>
+            <a-select v-model:value="formState.emailAddon" style="width: 160px">
+              <a-select-option value="@stu.xjtu.edu.cn">@stu.xjtu.edu.cn</a-select-option>
+              <a-select-option value="@mail.xjtu.edu.cn">@mail.xjtu.edu.cn</a-select-option>
+            </a-select>
+          </template>
+        </a-input>
+      </a-form-item>
 
-        <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            注册
-          </button>
+      <a-form-item name="nickname">
+        <a-input v-model:value="formState.email" type="nickname" autocomplete="off" placeholder="暱称">
+          <template #prefix>
+            <UserOutlined style="color: rgba(0, 0, 0, 0.5)" />
+          </template>
+        </a-input>
+      </a-form-item>
+
+      <a-form-item name="pass">
+        <a-input v-model:value="formState.pass" type="password" autocomplete="off" placeholder="密码">
+          <template #prefix>
+            <LockOutlined style="color: rgba(0, 0, 0, 0.5)" />
+          </template>
+        </a-input>
+      </a-form-item>
+      <a-form-item name="passCheck">
+        <a-input v-model:value="formState.passCheck" type="password" autocomplete="off" placeholder="确认密码">
+          <template #prefix>
+            <LockOutlined style="color: rgba(0, 0, 0, 0.5)" />
+          </template>
+        </a-input>
+      </a-form-item>
+      <a-form-item>
+        <div class="flex items-center justify-between">
+          <div class="text-sm">
+            已经有账户？
+            <router-link to="/login" class="font-medium">
+              登录账户
+            </router-link>
+          </div>
         </div>
-      </form>
-    </div>
-  </div>
+      </a-form-item>
+      <a-form-item>
+        <a-button class="w-full mt-2" type="primary" html-type="submit">注册</a-button>
+      </a-form-item>
+    </a-form>
+  </template>
+  </Base>
 </template>
 
 <script>
-export default {
-  components: {},
-};
+import Base from "./_Base.vue";
+import {
+  LockOutlined,
+  MailOutlined,
+  UserOutlined,
+} from "@ant-design/icons-vue";
+import { defineComponent, reactive, ref } from "vue";
+export default defineComponent({
+  setup() {
+    const formRef = ref();
+    const formState = reactive({
+      email: "",
+      pass: "",
+      passCheck: "",
+      emailAddon: "@stu.xjtu.edu.cn",
+      remember: false,
+    });
+
+    let validatePass = async (rule, value) => {
+      if (value === "") {
+        return Promise.reject("请输入密码");
+      } else if (value.length < 8) {
+        return Promise.reject("密码长度应超过8位");
+      } else {
+        if (formState.passCheck !== "") {
+          formRef.value.validateField("checkPass");
+        }
+        return Promise.resolve();
+      }
+    };
+
+    let validatePass2 = async (rule, value) => {
+      if (value === "") {
+        return Promise.reject("请再次输入密码");
+      } else if (value !== formState.pass) {
+        return Promise.reject("两次输入不一致");
+      } else {
+        return Promise.resolve();
+      }
+    };
+
+    let validateEmail = async (rule, value) => {
+      // let patt =
+      //   /^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$/;
+      // let checkEmail = value.search(patt);
+      if (value === "") {
+        return Promise.reject("请输入邮箱");
+      } else {
+        return Promise.resolve();
+      }
+    };
+
+    const rules = {
+      pass: [
+        {
+          // required: true,
+          validator: validatePass,
+          trigger: "change",
+        },
+      ],
+      passCheck: [
+        {
+          // required: true,
+          validator: validatePass2,
+          trigger: "change",
+        },
+      ],
+      email: [
+        {
+          validator: validateEmail,
+          // required:true,
+          trigger: "change",
+          // pattern: "^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$"
+        },
+      ],
+    };
+    const layout = {
+      labelCol: {
+        span: 4,
+      },
+      wrapperCol: {
+        span: 10,
+      },
+    };
+
+    const handleFinish = (values) => {
+      console.log(values, formState);
+      // TODO 加密方式？
+    };
+
+    const handleFinishFailed = (errors) => {
+      console.log(errors);
+    };
+
+    return {
+      formState,
+      formRef,
+      rules,
+      layout,
+      handleFinishFailed,
+      handleFinish,
+    };
+  },
+  components: {
+    Base,
+    LockOutlined,
+    MailOutlined,
+    UserOutlined,
+  },
+});
+
+// export default {
+//   components: { Base },
+//   emits: ["showSignup"],
+// };
 </script>
