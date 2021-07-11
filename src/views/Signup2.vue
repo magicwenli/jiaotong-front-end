@@ -1,14 +1,21 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-11 21:36:13
+ * @LastEditTime : 2021-07-11 21:42:14
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\views\Login.vue
+ * @FilePath     : \jiaotong-front-end\src\views\Signup2.vue
 -->
 
 
 <template>
   <Base>
+    <template v-slot:headline>
+    <a class="fas fa-user-plus" />&ensp;
+    注册
+  </template>
+  <template v-slot:tips>
+    目前仅接受部分邮箱注册。
+  </template>
     <template #default>
       <el-form
         :model="loginForm"
@@ -16,40 +23,39 @@
         ref="loginForm"
         label-width="100px"
         label-position="top"
-        class="space-y-4"
+        class="space-y-2"
         hide-required-asterisk
       >
-        <el-form-item prop="email">
+        <el-form-item prop="email" label="注册邮箱">
           <el-input
             type="email"
             v-model="loginForm.email"
             autocomplete="off"
             prefix-icon="el-icon-message"
-            placeholder="请输入邮箱"
           >
           </el-input>
         </el-form-item>
-        <el-form-item prop="pass">
+        <el-form-item prop="pass" label="密码">
           <el-input
             type="password"
             v-model="loginForm.pass"
             autocomplete="off"
             prefix-icon="el-icon-lock"
-            placeholder="请输入密码"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="pass" label="密码">
+          <el-input
+            type="password"
+            v-model="loginForm.pass"
+            autocomplete="off"
+            prefix-icon="el-icon-lock"
           ></el-input>
         </el-form-item>
         <el-form-item>
           <div class="flex items-center justify-between">
             <el-checkbox v-model:checked="loginForm.remember">
-              记住我
+              我已阅读，并同意<a href="#">《用户协议》</a>
             </el-checkbox>
-            <div class="text-sm font-medium">
-              <router-link to="/" > 忘记密码 </router-link>
-              &emsp;
-              <router-link to="/signup">
-                注册账户
-              </router-link>
-            </div>
           </div>
         </el-form-item>
         <el-form-item>

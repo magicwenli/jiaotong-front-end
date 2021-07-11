@@ -7,6 +7,7 @@ import My from '../views/My.vue';
 import Post from '../views/Post.vue';
 import SignUp from '../views/SignUp.vue';
 import Login from '../views/Login.vue';
+import SignUp2 from '../views/SignUp2.vue';
 
 
 // 2. 定义一些路由
@@ -16,7 +17,8 @@ const routes = [
     { path: '/', component: ShuDong },
     { path: '/post', component: Post },
     { path: '/my', component: My },
-    { path: '/signup', component: SignUp },
+    { path: '/signup', component: SignUp2 },
+    { path: '/signup2', component: SignUp2 },
     { path: '/login', component: Login },
 
 ]
