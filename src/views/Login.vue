@@ -1,115 +1,121 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-10 14:46:25
+ * @LastEditTime : 2021-07-11 21:31:10
  * @Description  : 
- * @FilePath     : /front-end/src/views/Login.vue
+ * @FilePath     : \jiaotong-front-end\src\views\Login.vue
 -->
 
 
 <template>
   <Base>
     <template #default>
-      <el-input
-        placeholder="请输入内容"
-        v-model="input3"
-        class="input-with-select"
+      <el-form
+        :model="loginForm"
+        :rules="rules"
+        ref="loginForm"
+        label-width="100px"
+        label-position="top"
+        class="space-y-4"
+        hide-required-asterisk
       >
-        <template #prepend>
-          <el-select v-model="select" placeholder="请选择">
-            <el-option label="餐厅名" value="1"></el-option>
-            <el-option label="订单号" value="2"></el-option>
-            <el-option label="用户电话" value="3"></el-option>
-          </el-select>
-        </template>
-      </el-input>
+        <el-form-item prop="email">
+          <el-input
+            type="email"
+            v-model="loginForm.email"
+            autocomplete="off"
+            prefix-icon="el-icon-message"
+          >
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="pass">
+          <el-input
+            type="password"
+            v-model="loginForm.pass"
+            autocomplete="off"
+            prefix-icon="el-icon-lock"
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <div class="flex items-center justify-between">
+            <el-checkbox v-model:checked="loginForm.remember">
+              记住我
+            </el-checkbox>
+            <div class="text-sm font-medium">
+              <router-link to="/" > 忘记密码 </router-link>
+              &emsp;
+              <router-link to="/signup">
+                注册账户
+              </router-link>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            class="w-full"
+            type="primary"
+            @click="submitForm('loginForm')"
+            >提交</el-button
+          >
+        </el-form-item>
+      </el-form>
     </template>
   </Base>
 </template>
 
 <script>
 import Base from "./_Base.vue";
-import { defineComponent, reactive, ref } from "vue";
-export default defineComponent({
-  setup() {
-    const formRef = ref();
-    const formState = reactive({
-      email: "",
-      pass: "",
-      emailAddon: "@stu.xjtu.edu.cn",
-      remember: false,
-    });
 
-    let validatePass = async (rule, value) => {
-      if (value === "") {
-        return Promise.reject("请输入密码");
-      } else {
-        return Promise.resolve();
-      }
-    };
-
-    let validateEmail = async (rule, value) => {
-      // let patt =
-      //   /^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$/;
-      // let checkEmail = value.search(patt);
-      if (value === "") {
-        return Promise.reject("请输入邮箱");
-      } else {
-        return Promise.resolve();
-      }
-    };
-
-    const rules = {
-      pass: [
-        {
-          // required: true,
-          validator: validatePass,
-          trigger: "change",
-        },
-      ],
-      email: [
-        {
-          validator: validateEmail,
-          // required:true,
-          trigger: "change",
-          // pattern: "^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$"
-        },
-      ],
-    };
-    const layout = {
-      labelCol: {
-        span: 4,
-      },
-      wrapperCol: {
-        span: 10,
-      },
-    };
-
-    const handleFinish = (values) => {
-      console.log(values, formState);
-      // TODO 加密方式？
-    };
-
-    const handleFinishFailed = (errors) => {
-      console.log(errors);
-    };
-
-    return {
-      formState,
-      formRef,
-      rules,
-      layout,
-      handleFinishFailed,
-      handleFinish,
-    };
-  },
+export default {
   components: {
-    Base
+    Base,
   },
-});
+  data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        callback();
+      }
+    };
+    var validateEmail = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入邮箱"));
+      } else {
+        let patt =
+          /^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$/;
+        let emailPass = value.search(patt);
 
-// export default {
-//   components: { Base },
-//   emits: ["showSignup"],
-// };
+        if (emailPass) {
+          callback(new Error("暂时不接受该类邮箱注册"));
+        } else {
+          callback();
+        }
+      }
+    };
+    return {
+      loginForm: {
+        pass: "",
+        email: "",
+        remember: false,
+      },
+      rules: {
+        email: [{ validator: validateEmail, trigger: "blur" }],
+        pass: [{ validator: validatePass, trigger: "blur" }],
+      },
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+  },
+};
 </script>

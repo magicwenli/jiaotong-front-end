@@ -30,6 +30,7 @@
   	"vetur.format.options.useTabs": false,
 	"vetur.format.defaultFormatter.html": "prettier",
 	"vetur.format.defaultFormatterOptions": {
+	
 	"prettier": {
 		// Prettier option here
 		"semi": true,
