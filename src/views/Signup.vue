@@ -1,191 +1,142 @@
 <!--
  * @Author       : magicwenli
- * @Date         : 2021-07-08 19:46:02
- * @LastEditTime : 2021-07-10 10:22:25
+ * @Date         : 2021-07-08 15:59:03
+ * @LastEditTime : 2021-07-11 21:49:09
  * @Description  : 
- * @FilePath     : /front-end/src/views/Signup.vue
+ * @FilePath     : \jiaotong-front-end\src\views\Signup.vue
 -->
+
 
 <template>
   <Base>
-  <template v-slot:headline>
-    <a class="fas fa-user-plus" />&ensp;
-    注册
-  </template>
-  <template v-slot:tips>
-    目前仅接受部分邮箱注册。
-  </template>
-
-  <template v-slot:default>
-    <a-form name="custom-validation" ref="formRef" :model="formState" :rules="rules" v-bind="layout" @finish="handleFinish" @finishFailed="handleFinishFailed">
-      <a-form-item name="email">
-        <a-input v-model:value="formState.email" type="text" autocomplete="off" placeholder="邮箱">
-          <template #prefix>
-            <MailOutlined style="color: rgba(0, 0, 0, 0.5)" />
-          </template>
-          <template #addonAfter>
-            <a-select v-model:value="formState.emailAddon" style="width: 160px">
-              <a-select-option value="@stu.xjtu.edu.cn">@stu.xjtu.edu.cn</a-select-option>
-              <a-select-option value="@mail.xjtu.edu.cn">@mail.xjtu.edu.cn</a-select-option>
-            </a-select>
-          </template>
-        </a-input>
-      </a-form-item>
-
-      <a-form-item name="nickname">
-        <a-input v-model:value="formState.email" type="nickname" autocomplete="off" placeholder="暱称">
-          <template #prefix>
-            <UserOutlined style="color: rgba(0, 0, 0, 0.5)" />
-          </template>
-        </a-input>
-      </a-form-item>
-
-      <a-form-item name="pass">
-        <a-input v-model:value="formState.pass" type="password" autocomplete="off" placeholder="密码">
-          <template #prefix>
-            <LockOutlined style="color: rgba(0, 0, 0, 0.5)" />
-          </template>
-        </a-input>
-      </a-form-item>
-      <a-form-item name="passCheck">
-        <a-input v-model:value="formState.passCheck" type="password" autocomplete="off" placeholder="确认密码">
-          <template #prefix>
-            <LockOutlined style="color: rgba(0, 0, 0, 0.5)" />
-          </template>
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <div class="flex items-center justify-between">
-          <div class="text-sm">
-            已经有账户？
-            <router-link to="/login" class="font-medium">
-              登录账户
-            </router-link>
+    <template v-slot:headline>
+      <a class="fas fa-user-plus" />&ensp; 注册
+    </template>
+    <template v-slot:tips> 目前仅接受部分邮箱注册。 </template>
+    <template #default>
+      <el-form
+        :model="signupForm"
+        :rules="rules"
+        ref="signupForm"
+        label-width="100px"
+        label-position="top"
+        class="mx-2"
+        hide-required-asterisk
+      >
+        <el-form-item prop="email" label="注册邮箱">
+          <el-input
+            type="email"
+            v-model="signupForm.email"
+            autocomplete="off"
+            prefix-icon="el-icon-message"
+          >
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="pass" label="输入密码">
+          <el-input
+            type="password"
+            v-model="signupForm.pass"
+            autocomplete="off"
+            prefix-icon="el-icon-lock"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="repass" label="再次输入密码">
+          <el-input
+            type="password"
+            v-model="signupForm.repass"
+            autocomplete="off"
+            prefix-icon="el-icon-lock"
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <div class="flex items-center justify-between">
+            <el-checkbox v-model:checked="signupForm.remember">
+              我已阅读，并同意<a href="#">《用户协议》</a>
+            </el-checkbox>
           </div>
-        </div>
-      </a-form-item>
-      <a-form-item>
-        <a-button class="w-full mt-2" type="primary" html-type="submit">注册</a-button>
-      </a-form-item>
-    </a-form>
-  </template>
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            class="w-full"
+            type="primary"
+            @click="submitForm('signupForm')"
+            >提交</el-button
+          >
+        </el-form-item>
+      </el-form>
+    </template>
   </Base>
 </template>
 
 <script>
 import Base from "./_Base.vue";
-import {
-  LockOutlined,
-  MailOutlined,
-  UserOutlined,
-} from "@ant-design/icons-vue";
-import { defineComponent, reactive, ref } from "vue";
-export default defineComponent({
-  setup() {
-    const formRef = ref();
-    const formState = reactive({
-      email: "",
-      pass: "",
-      passCheck: "",
-      emailAddon: "@stu.xjtu.edu.cn",
-      remember: false,
-    });
 
-    let validatePass = async (rule, value) => {
-      if (value === "") {
-        return Promise.reject("请输入密码");
-      } else if (value.length < 8) {
-        return Promise.reject("密码长度应超过8位");
-      } else {
-        if (formState.passCheck !== "") {
-          formRef.value.validateField("checkPass");
-        }
-        return Promise.resolve();
-      }
-    };
-
-    let validatePass2 = async (rule, value) => {
-      if (value === "") {
-        return Promise.reject("请再次输入密码");
-      } else if (value !== formState.pass) {
-        return Promise.reject("两次输入不一致");
-      } else {
-        return Promise.resolve();
-      }
-    };
-
-    let validateEmail = async (rule, value) => {
-      // let patt =
-      //   /^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$/;
-      // let checkEmail = value.search(patt);
-      if (value === "") {
-        return Promise.reject("请输入邮箱");
-      } else {
-        return Promise.resolve();
-      }
-    };
-
-    const rules = {
-      pass: [
-        {
-          // required: true,
-          validator: validatePass,
-          trigger: "change",
-        },
-      ],
-      passCheck: [
-        {
-          // required: true,
-          validator: validatePass2,
-          trigger: "change",
-        },
-      ],
-      email: [
-        {
-          validator: validateEmail,
-          // required:true,
-          trigger: "change",
-          // pattern: "^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$"
-        },
-      ],
-    };
-    const layout = {
-      labelCol: {
-        span: 4,
-      },
-      wrapperCol: {
-        span: 10,
-      },
-    };
-
-    const handleFinish = (values) => {
-      console.log(values, formState);
-      // TODO 加密方式？
-    };
-
-    const handleFinishFailed = (errors) => {
-      console.log(errors);
-    };
-
-    return {
-      formState,
-      formRef,
-      rules,
-      layout,
-      handleFinishFailed,
-      handleFinish,
-    };
-  },
+export default {
   components: {
     Base,
-    LockOutlined,
-    MailOutlined,
-    UserOutlined,
   },
-});
+  data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else if (value.length < 8) {
+        callback(new Error("密码长度应超过8位"));
+      } else {
+        if (this.ruleForm.checkPass !== "") {
+          this.$refs.ruleForm.validateField("checkPass");
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
+    var validateEmail = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入邮箱"));
+      } else {
+        let patt =
+          /^[a-zA-Z0-9-.]+@[sS][tT][uU]\.[xX][jJ][tT][uU]\.[eE][dD][uU]\.[cC][nN]$/;
+        let emailPass = value.search(patt);
 
-// export default {
-//   components: { Base },
-//   emits: ["showSignup"],
-// };
+        if (emailPass) {
+          callback(new Error("暂时不接受该类邮箱注册"));
+        } else {
+          callback();
+        }
+      }
+    };
+    return {
+      signupForm: {
+        pass: "",
+        email: "",
+        repass:"",
+        remember: false,
+      },
+      rules: {
+        email: [{ validator: validateEmail, trigger: "blur" }],
+        pass: [{ validator: validatePass, trigger: "blur" }],
+        repass: [{ validator: validatePass2, trigger: "blur" }],
+      },
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+  },
+};
 </script>
