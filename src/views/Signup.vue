@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-11 21:49:09
+ * @LastEditTime : 2021-07-11 21:49:59
  * @Description  : 
  * @FilePath     : \jiaotong-front-end\src\views\Signup.vue
 -->
@@ -20,7 +20,7 @@
         ref="signupForm"
         label-width="100px"
         label-position="top"
-        class="mx-2"
+        class="mx-2 space-y-2"
         hide-required-asterisk
       >
         <el-form-item prop="email" label="注册邮箱">

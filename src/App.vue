@@ -2,18 +2,20 @@
   <div class="relative">
     <NavBar />
     <router-view></router-view>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import NavBar from "./components/NavBar.vue";
 import SignupCheck from "./components/SignupCheck.vue";
+import Footer from "./components/Footer.vue";
 
 
 // import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  components: { NavBar, SignupCheck },
+  components: { NavBar, SignupCheck,Footer },
 }
 
 // This starter template is using Vue 3 experimental <script setup> SFCs

@@ -1,13 +1,13 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-08 11:04:36
+ * @LastEditTime : 2021-07-11 21:59:03
  * @Description  : 
- * @FilePath     : /front-end/src/components/Contents.vue
+ * @FilePath     : \jiaotong-front-end\src\components\Contents.vue
 -->
 
 <template>
-  <div class="flex-col bg-gray-200 pt-1 -mt-1">
+  <div class="flex-col bg-gray-200 py-1 -my-1">
     <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
   </div>
 </template>
