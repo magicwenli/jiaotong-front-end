@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-12 10:48:03
+ * @LastEditTime : 2021-07-12 10:59:46
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
@@ -29,7 +29,7 @@
       <div class="mt-4">
         <el-upload
           class=""
-          action="http://192.168.43.165/test/upload"
+          action="/api/test/upload"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :on-change="handleChange"

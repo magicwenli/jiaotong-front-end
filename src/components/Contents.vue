@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-11 21:59:03
+ * @LastEditTime : 2021-07-12 11:10:21
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\components\Contents.vue
+ * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
@@ -27,7 +27,7 @@ export default {
   },
   mounted() {
     API
-      .get("/latest")
+      .get("/latest_copy")
       .then((response) => {
         console.log(response);
         this.posts = response.data.posts;

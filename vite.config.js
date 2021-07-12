@@ -29,4 +29,13 @@ export default defineConfig({
       // 'vue$': 'vue/dist/vue.js' // 定义vue的别名，如果使用其他的插件，可能会用到别名
     }
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://192.168.43.165',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/api/, '')
+      }
+    }
+  }
 })
