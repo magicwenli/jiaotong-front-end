@@ -1,24 +1,19 @@
 <template>
+<!-- 如果用户没有登录，应跳转到Login。 否则显示My。 -->
   <div>
     <transition name="mybox" mode="out-in">
       <div v-show="showLogin" :class="{shake: shake}">
         <Login @show-signup="openSignup" />
       </div>
     </transition>
-    <transition name="mybox" mode="out-in">
-      <div v-show="showSignup" :class="{shake: shake}">
-        <Signup />
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
-import Login from '../components/Login.vue';
-import Signup from '../components/Signup.vue';
+import Login from './Login.vue';
 
 export default {
-  components: { Login, Signup },
+  components: { Login },
   data() {
     return {
       showLogin: true,
