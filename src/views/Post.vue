@@ -1,20 +1,20 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-12 10:19:21
+ * @LastEditTime : 2021-07-12 10:48:03
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
 
 <template>
-  <div class="flex flex-col mx-4">
+  <div class="flex flex-col mx-4 mt-4">
     <el-form>
       <div class="flex flex-row mt-4">
-        <router-link class="text-gray-900 text-base my-auto" to="/"><i class="el-icon-arrow-left"></i>返回</router-link>
+        <router-link class="text-gray-900 text-lg my-auto" to="/"><i class="el-icon-arrow-left"></i>返回</router-link>
         <div class="flex-grow my-auto">
-          <h2 class="text-gray-900 text-xl">发布动态</h2>
+          <h2 class="text-center text-xl font-extrabold text-gray-900">发布动态</h2>
         </div>
-        <router-link class="text-gray-900 text-base my-auto" to="/"><i class="el-icon-check"></i>发布</router-link>
+        <router-link class="text-gray-900 text-lg my-auto" to="/"><i class="el-icon-check"></i>发布</router-link>
       </div>
       <div class="mt-4">
         <el-input
@@ -29,7 +29,7 @@
       <div class="mt-4">
         <el-upload
           class=""
-          action="#"
+          action="http://192.168.43.165/test/upload"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :on-change="handleChange"
