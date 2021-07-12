@@ -1,13 +1,14 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-12 11:10:21
+ * @LastEditTime : 2021-07-12 15:28:46
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
-  <div class="flex-col bg-gray-200 py-1 -my-1">
+
+  <div class="flex-col bg-gray-200 py-1 -my-1 w-full">
     <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
   </div>
 </template>
@@ -33,7 +34,7 @@ export default {
         this.posts = response.data.posts;
         })
       .catch((error) => console.log(error));
-  }
+  },
 };
 </script>
 

@@ -18,7 +18,7 @@ const routes = [
     { path: '/my', component: My },
     { path: '/signup', component: SignUp },
     { path: '/login', component: Login },
-
+    { path: '/latest', component: My },
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

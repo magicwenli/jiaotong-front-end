@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-12 14:55:46
+ * @LastEditTime : 2021-07-12 15:29:35
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -10,6 +10,7 @@
   <el-card
     :body-style="{ padding: '0px' }"
     class="bg-gray-50 shadow-md p-4 m-2"
+    v-loading="loading"
   >
     <div class="flex flex-row relative">
       <!-- 头像 -->
@@ -89,6 +90,17 @@ export default {
     emailHash(email) {
       return "https://cdn.v2ex.com/gravatar/" + md5(email) + "?d=monsterid";
     },
+    init(){
+      this.loading=false;
+    }
   },
+  data(){
+    return{
+      loading: true,
+    }
+  },
+  mounted(){
+    this.init()
+  }
 };
 </script>
