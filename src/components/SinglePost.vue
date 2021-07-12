@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-12 15:29:35
+ * @LastEditTime : 2021-07-12 15:42:45
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -14,10 +14,11 @@
   >
     <div class="flex flex-row relative">
       <!-- 头像 -->
-      <img
+      <el-image
         class="w-12 h-12 rounded-2xl flex-none"
         :src="emailHash(email)"
         :alt="123"
+        lazy
       />
       <div class="flex-row px-4 text-left text-md">
         <div>
@@ -35,28 +36,31 @@
     </div>
     <div class="relative overflow-hidden">
       <!-- 正文 -->
-        <el-image v-if="hasImg" class="float-right ml-4 mt-2 mb-2 rounded-lg w-4/12"
-          :src="img"
-        >
-          <template #error>
-            <div class="image-slot">
-              <i class="el-icon-picture-outline"></i>
-            </div>
-          </template>
-        </el-image>
+      <el-image
+        v-if="hasImg"
+        class="float-right ml-4 mt-2 mb-2 rounded-lg w-4/12"
+        :src="img"
+        lazy
+      >
+        <template #error>
+          <div class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </template>
+      </el-image>
       <p class="text-justify pt-2 font-serif" style="text-indent: 2em">
         {{ content }}
       </p>
     </div>
     <div class="flex space-x-2 pt-2 justify-items-start">
-      <a
+      <router-link
         v-for="label in labels"
         :key="label.name"
-        :href="label.href"
+        :to="label.href"
         class="border-1 rounded-md"
       >
         <span class="text-purple-500 text-lg font-bold">#</span>{{ label.name }}
-      </a>
+      </router-link>
     </div>
     <div class="flex pt-2 space-x-2">
       <a class="flex-1 rounded-3xl bg-green-100">
@@ -81,7 +85,16 @@ import { generateFromString } from "generate-avatar";
 import md5 from "js-md5";
 
 export default {
-  props: ["tid", "email","hasImg","img","intro", "content", "publicTime", "labels"],
+  props: [
+    "tid",
+    "email",
+    "hasImg",
+    "img",
+    "intro",
+    "content",
+    "publicTime",
+    "labels",
+  ],
   methods: {
     formatTimeData(time) {
       let newDate = formatTime(new Date(time).getTime() / 1000);
@@ -90,17 +103,17 @@ export default {
     emailHash(email) {
       return "https://cdn.v2ex.com/gravatar/" + md5(email) + "?d=monsterid";
     },
-    init(){
-      this.loading=false;
-    }
+    init() {
+      this.loading = false;
+    },
   },
-  data(){
-    return{
+  data() {
+    return {
       loading: true,
-    }
+    };
   },
-  mounted(){
-    this.init()
-  }
+  mounted() {
+    this.init();
+  },
 };
 </script>

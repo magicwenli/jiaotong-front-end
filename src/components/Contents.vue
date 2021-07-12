@@ -1,13 +1,12 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-12 15:28:46
+ * @LastEditTime : 2021-07-12 16:27:09
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
-
   <div class="flex-col bg-gray-200 py-1 -my-1 w-full">
     <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
   </div>
@@ -27,12 +26,11 @@ export default {
     };
   },
   mounted() {
-    API
-      .get("/latest_copy")
+    API.get("/latest_copy")
       .then((response) => {
         console.log(response);
         this.posts = response.data.posts;
-        })
+      })
       .catch((error) => console.log(error));
   },
 };
