@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-13 09:54:36
+ * @LastEditTime : 2021-07-13 15:38:57
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -107,7 +107,7 @@ export default {
       return newDate;
     },
     emailHash(email) {
-      return "https://cdn.v2ex.com/gravatar/" + md5(email) + "?d=monsterid";
+      return "https://gravatar.loli.net/avatar/" + md5(email) + "?d=monsterid";
     },
     init() {
       this.loading = false;
