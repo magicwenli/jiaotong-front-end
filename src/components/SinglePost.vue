@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-13 15:38:57
+ * @LastEditTime : 2021-07-14 00:13:32
  * @Description  : 
- * @FilePath     : /front-end/src/components/SinglePost.vue
+ * @FilePath     : \jiaotong-front-end\src\components\SinglePost.vue
 -->
 
 <template>
@@ -66,33 +66,42 @@
           text-sm
         "
       >
-        <span class="text-purple-500 text-base font-bold">#</span>{{ label.name }}
+        <span class="text-purple-500 text-base font-bold">#</span
+        >{{ label.name }}
       </router-link>
     </div>
     <div class="flex pt-4 space-x-2">
-      <button type="primary" class="flex-1 rounded-3xl bg-green-100">
+      <el-checkbox-button :label="up">
         <i class="far fa-thumbs-up"></i>
         <span>&ensp;123</span>
-        </button>
-      <button class="flex-1 rounded-3xl bg-green-100">
+      </el-checkbox-button>
+
+      <button type="" class="flex-1 rounded-3xl bg-green-100">
+        <i class="far fa-thumbs-up"></i>
+        <span>&ensp;123</span>
+      </button>
+      <!-- <button class="flex-1 rounded-3xl bg-green-100">
         <i class="far fa-thumbs-down"></i>
         <span>&ensp;456</span>
-      </button>
-      <button class="flex-1 rounded-3xl bg-green-100" @click="showComments = !showComments">
+      </button> -->
+      <button
+        class="flex-1 rounded-3xl bg-green-100"
+        @click="showComments = !showComments"
+      >
         <i class="fas fa-reply"></i>
         <span>&ensp;789</span>
       </button>
     </div>
     <div class="pt-4 overflow-hidden">
       <transition name="comments">
-        <Comments v-if="showComments"/>
+        <Comments v-if="showComments" />
       </transition>
     </div>
   </el-card>
 </template>
 
 <script>
-import Comments from './Comments.vue';
+import Comments from "./Comments.vue";
 import formatTime from "../utils/TimeFormater.vue";
 import md5 from "js-md5";
 
@@ -100,15 +109,7 @@ export default {
   components: {
     Comments,
   },
-  props: [
-    "pid",
-    "muid",
-    "hasImg",
-    "img",
-    "content",
-    "createTime",
-    "labels",
-  ],
+  props: ["pid", "muid", "hasImg", "img", "content", "createTime", "labels"],
   methods: {
     formatTimeData(time) {
       let newDate = formatTime(new Date(time).getTime() / 1000);
