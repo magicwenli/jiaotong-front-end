@@ -9,7 +9,7 @@
 <script>
 import axios from 'axios';
 
-export default axios.create({
+const request = axios.create({
     baseURL: `http://124.70.111.3:7300/mock/60e6ab6c579b09002106eded`,
     headers: {
         'Content-Type': 'application/json',
@@ -19,4 +19,15 @@ export default axios.create({
     xsrfHeaderName: 'X-CSRFToken',
     withCredentials: true
 });
+
+request.interceptors.response.use(res => {
+    // if (res.data.state == 200) {
+    //     return res.data.data;
+    // } else {
+    //     return Promise.reject(res.data.message);
+    // }
+    return res
+}, err => Promise.reject(err.message));
+
+export default request;
 </script>

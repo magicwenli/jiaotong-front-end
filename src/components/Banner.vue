@@ -7,7 +7,7 @@
 -->
 <template>
   <div class="mx-auto md:max-w-3/4 lg:max-w-1/2">
-    <nav @click.prevent class="flex flex-row flex-nowrap overflow-scroll">
+    <nav @click.prevent class="flex flex-row flex-nowrap overflow-auto">
       <div
         v-for="label in labels"
         :key="label.id"
