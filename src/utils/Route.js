@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 // 1. 定义路由组件.
 // 也可以从其他文件导入
 import ShuDong from '../views/ShuDong.vue';
-import My from '../views/My.vue';
+import UserInfo from '../views/UserInfo.vue';
 import Post from '../views/Post.vue';
 import SignUp from '../views/SignUp.vue';
 import Login from '../views/Login.vue';
@@ -16,7 +16,7 @@ const routes = [
     {
         path: '/',
         component: ShuDong,
-        meta: { isLogin: false }
+        meta: { isLogin: true }
     },
     {
         path: '/post', 
@@ -24,8 +24,8 @@ const routes = [
         meta: { isLogin: true }
     },
     {
-        path: '/my', 
-        component: My,
+        path: '/userinfo', 
+        component: UserInfo,
         meta: { isLogin: true }
     },
     {
@@ -40,8 +40,8 @@ const routes = [
     },
     {
         path: '/latest', 
-        component: My,
-        meta: { isLogin: true }
+        component: ShuDong,
+        meta: { isLogin: false }
     },
 ]
 

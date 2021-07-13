@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 10:28:20
- * @LastEditTime : 2021-07-09 11:08:28
+ * @LastEditTime : 2021-07-13 10:37:49
  * @Description  : 
  * @FilePath     : /front-end/src/components/NavBar.vue
 -->
@@ -17,7 +17,7 @@
       <router-link to="/" class="flex-grow mx-2 py-3 no-underline border-b-2 border-transparent tracking-wide ">
         <span class="text-green-600">JiaoTong</span>
       </router-link>
-      <router-link to="/my" class="mr-4 py-3 no-underline border-b-2 border-transparent tracking-wide">
+      <router-link to="/userinfo" class="mr-4 py-3 no-underline border-b-2 border-transparent tracking-wide">
         <i class="fa fa-user-circle"></i>
         <span class="pl-2">我的</span>
       </router-link>

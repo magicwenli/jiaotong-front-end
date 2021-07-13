@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-12 16:47:29
+ * @LastEditTime : 2021-07-13 09:54:36
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -88,7 +88,6 @@
 
 <script>
 import formatTime from "../utils/TimeFormater.vue";
-import { generateFromString } from "generate-avatar";
 import md5 from "js-md5";
 
 export default {
