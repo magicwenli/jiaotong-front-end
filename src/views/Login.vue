@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-11 21:36:13
+ * @LastEditTime : 2021-07-13 09:27:50
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\views\Login.vue
+ * @FilePath     : /front-end/src/views/Login.vue
 -->
 
 
@@ -44,11 +44,9 @@
               记住我
             </el-checkbox>
             <div class="text-sm font-medium">
-              <router-link to="/" > 忘记密码 </router-link>
+              <router-link to="/"> 忘记密码 </router-link>
               &emsp;
-              <router-link to="/signup">
-                注册账户
-              </router-link>
+              <router-link to="/signup"> 注册账户 </router-link>
             </div>
           </div>
         </el-form-item>
@@ -67,6 +65,8 @@
 
 <script>
 import Base from "./_Base.vue";
+import API from "../utils/API.vue";
+import { ElMessage } from "element-plus";
 
 export default {
   components: {
@@ -111,7 +111,32 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          API.post("/login", {
+            email: this.loginForm.email,
+            password: this.loginForm.password,
+          }).then((data) => {
+            //登录失败,先不讨论
+            console.log(data);
+            if (data.data.status != 200) {
+              //iViewUi的友好提示
+              ElMessage({
+                showClose: true,
+                message: "登录出现预料之外的错误",
+                type: "error",
+              });
+              //登录成功
+            } else {
+              //设置Vuex登录标志为true，默认userLogin为false
+              this.$store.dispatch("userLogin", true);
+              //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
+              //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
+              localStorage.setItem("Flag", "isLogin");
+              //iViewUi的友好提示
+              ElMessage({ showClose: true, message: "登录成功" });
+              //登录成功后跳转到指定页面
+              this.$router.push("/");
+            }
+          });
         } else {
           console.log("error submit!!");
           return false;

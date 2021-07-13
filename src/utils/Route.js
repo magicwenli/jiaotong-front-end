@@ -13,12 +13,36 @@ import Login from '../views/Login.vue';
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
 const routes = [
-    { path: '/', component: ShuDong },
-    { path: '/post', component: Post },
-    { path: '/my', component: My },
-    { path: '/signup', component: SignUp },
-    { path: '/login', component: Login },
-    { path: '/latest', component: My },
+    {
+        path: '/',
+        component: ShuDong,
+        meta: { isLogin: false }
+    },
+    {
+        path: '/post', 
+        component: Post,
+        meta: { isLogin: true }
+    },
+    {
+        path: '/my', 
+        component: My,
+        meta: { isLogin: true }
+    },
+    {
+        path: '/signup', 
+        component: SignUp,
+        meta: { isLogin: false }
+    },
+    {
+        path: '/login', 
+        component: Login,
+        meta: { isLogin: false }
+    },
+    {
+        path: '/latest', 
+        component: My,
+        meta: { isLogin: true }
+    },
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

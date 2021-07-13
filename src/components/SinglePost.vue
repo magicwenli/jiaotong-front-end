@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-12 15:42:45
+ * @LastEditTime : 2021-07-12 16:47:29
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -38,7 +38,7 @@
       <!-- 正文 -->
       <el-image
         v-if="hasImg"
-        class="float-right ml-4 mt-2 mb-2 rounded-lg w-4/12"
+        class="float-right ml-4 mt-2 mr-2 mb-2 rounded-lg w-4/12 shadow-md"
         :src="img"
         lazy
       >
@@ -52,29 +52,36 @@
         {{ content }}
       </p>
     </div>
-    <div class="flex space-x-2 pt-2 justify-items-start">
+    <div class="flex space-x-4 pt-4 justify-items-start rounded-xl">
       <router-link
         v-for="label in labels"
         :key="label.name"
         :to="label.href"
-        class="border-1 rounded-md"
+        class="
+          px-2
+          border-green-900
+          bg-blue-100
+          rounded-tr-md
+          ring-2 ring-offset-2 ring-blue-400
+          text-sm
+        "
       >
-        <span class="text-purple-500 text-lg font-bold">#</span>{{ label.name }}
+        <span class="text-purple-500 text-base font-bold">#</span>{{ label.name }}
       </router-link>
     </div>
-    <div class="flex pt-2 space-x-2">
-      <a class="flex-1 rounded-3xl bg-green-100">
+    <div class="flex pt-4 space-x-2">
+      <button type="primary" class="flex-1 rounded-3xl bg-green-100">
         <i class="far fa-thumbs-up"></i>
         <span>&ensp;123</span>
-      </a>
-      <a class="flex-1 rounded-3xl bg-green-100">
+        </button>
+      <button class="flex-1 rounded-3xl bg-green-100">
         <i class="far fa-thumbs-down"></i>
         <span>&ensp;456</span>
-      </a>
-      <a class="flex-1 rounded-3xl bg-green-100">
+      </button>
+      <button class="flex-1 rounded-3xl bg-green-100">
         <i class="fas fa-reply"></i>
         <span>&ensp;789</span>
-      </a>
+      </button>
     </div>
   </el-card>
 </template>
