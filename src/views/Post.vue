@@ -29,15 +29,15 @@
       <div class="mt-4">
         <el-upload
           class=""
-          action="/api/test/upload"
+          action=""
+          :auto-upload="false"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :on-change="handleChange"
           :file-list="fileList"
           list-type="picture"
-          with-credentials
         >
-          <el-button class="" size="small" type="primary">点击上传</el-button>
+          <el-button class="" size="small" type="primary">上传图片</el-button>
           <template #tip>
             <div class="el-upload__tip">
               只能上传 jpg/png 文件，且不超过 500kb
@@ -56,6 +56,26 @@
 </template>
 
 <script>
+function compress(file) {
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const image = new Image()
+    const fileUrl = URL.createObjectURL(file)
+    image.src = fileUrl
+    image.onload = () => {
+      canvas.width = image.naturalWidth
+      canvas.height = image.naturalHeight
+      ctx.drawImage(image, 0, 0)
+      canvas.toBlob(newFile => {
+        URL.revokeObjectURL(fileUrl)
+        resolve(newFile)
+      }, 'image/jpeg', 0.5)
+    }
+    image.onerror = () => reject('无法读取图片文件')
+  })
+}
+
 export default {
   data() {
     return {
@@ -68,14 +88,14 @@ export default {
       return Converter.makeHtml(text);
     },
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      this.fileList = fileList;
     },
     handlePreview(file) {
       console.log(file);
     },
     handleChange(file, fileList) {
-        this.fileList = fileList.slice(-3);
-      }
+      this.fileList = fileList;
+    }
   },
   components: [],
 };
