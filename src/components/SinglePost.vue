@@ -16,21 +16,21 @@
       <!-- 头像 -->
       <el-image
         class="w-12 h-12 rounded-2xl flex-none"
-        :src="emailHash(email)"
+        :src="emailHash(muid)"
         :alt="123"
         lazy
       />
       <div class="flex-row px-4 text-left text-md">
         <div>
           <span class="font-bold text-gray-900 font-sans"
-            ><span class="text-purple-500">#&ensp;</span>{{ tid }}</span
+            ><span class="text-purple-500">#&ensp;</span>{{ pid }}</span
           >
           <!-- <a href="" class="h-4">
               <i class="absolute right-0 far fa-thumbs-up"></i>
         </a> -->
         </div>
         <div>
-          <span class="font-light">{{ formatTimeData(publicTime) }}</span>
+          <span class="font-light">{{ formatTimeData(createTime) }}</span>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
       <router-link
         v-for="label in labels"
         :key="label.name"
-        :to="label.href"
+        :to="label.url"
         class="
           px-2
           border-green-900
@@ -78,27 +78,35 @@
         <i class="far fa-thumbs-down"></i>
         <span>&ensp;456</span>
       </button>
-      <button class="flex-1 rounded-3xl bg-green-100">
+      <button class="flex-1 rounded-3xl bg-green-100" @click="showComments = !showComments">
         <i class="fas fa-reply"></i>
         <span>&ensp;789</span>
       </button>
+    </div>
+    <div class="pt-4 overflow-hidden">
+      <transition name="comments">
+        <Comments v-if="showComments"/>
+      </transition>
     </div>
   </el-card>
 </template>
 
 <script>
+import Comments from './Comments.vue';
 import formatTime from "../utils/TimeFormater.vue";
 import md5 from "js-md5";
 
 export default {
+  components: {
+    Comments,
+  },
   props: [
-    "tid",
-    "email",
+    "pid",
+    "muid",
     "hasImg",
     "img",
-    "intro",
     "content",
-    "publicTime",
+    "createTime",
     "labels",
   ],
   methods: {
@@ -116,6 +124,7 @@ export default {
   data() {
     return {
       loading: true,
+      showComments: false,
     };
   },
   mounted() {
@@ -123,3 +132,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.comments-enter-active,
+.comments-leave-active {
+  transition: all 0.5s;
+}
+
+.comments-enter-from,
+.comments-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+</style>

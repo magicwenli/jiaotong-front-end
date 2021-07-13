@@ -117,25 +117,21 @@ export default {
           }).then((data) => {
             //登录失败,先不讨论
             console.log(data);
-            if (data.status != 200) {
-              //iViewUi的友好提示
+            //设置Vuex登录标志为true，默认userLogin为false
+            this.$store.dispatch("userLogin", true);
+            //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
+            //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
+            localStorage.setItem("Flag", "isLogin");
+            //iViewUi的友好提示
+            ElMessage({ showClose: true, message: "登录成功" });
+            //登录成功后跳转到指定页面
+            this.$router.push("/");
+          }).catch((error) => {
               ElMessage({
                 showClose: true,
                 message: "登录出现预料之外的错误",
                 type: "error",
               });
-              //登录成功
-            } else {
-              //设置Vuex登录标志为true，默认userLogin为false
-              this.$store.dispatch("userLogin", true);
-              //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
-              //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
-              localStorage.setItem("Flag", "isLogin");
-              //iViewUi的友好提示
-              ElMessage({ showClose: true, message: "登录成功" });
-              //登录成功后跳转到指定页面
-              this.$router.push("/");
-            }
           });
         } else {
           console.log("error submit!!");

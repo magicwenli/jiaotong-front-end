@@ -28,10 +28,11 @@ export default {
     };
   },
   mounted() {
-    API.get("/latest_copy")
+    API.get("/posts")
       .then((response) => {
         console.log(response);
-        this.posts = response.data.posts;
+        this.posts = response[0].posts
+        console.log(this.posts)
       })
       .catch((error) => console.log(error));
   },

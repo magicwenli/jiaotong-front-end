@@ -10,7 +10,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-    baseURL: `http://124.70.111.3:7300/mock/60e6ab6c579b09002106eded`,
+    baseURL: `http://124.70.111.3:7300/mock/60e6ab6c579b09002106eded/api`,
     headers: {
         'Content-Type': 'application/json',
         // 'Authorization': "JWT " + localStorage.getItem('token')
@@ -26,7 +26,11 @@ request.interceptors.response.use(res => {
     // } else {
     //     return Promise.reject(res.data.message);
     // }
-    return res
+    if (res.data.success == 1) {
+        return res.data.data;
+    } else {
+        return Promise.reject('error');
+    }
 }, err => Promise.reject(err.message));
 
 export default request;
