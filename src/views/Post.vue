@@ -1,12 +1,13 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-12 10:59:46
+ * @LastEditTime : 2021-07-13 11:16:26
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
 
 <template>
+  <div class="mx-auto md:max-w-3/4 lg:max-w-1/2">
   <div class="flex flex-col mx-4 mt-4">
     <el-form>
       <div class="flex flex-row mt-4">
@@ -56,7 +57,7 @@
         </div>
       </div>
     </el-form>
-  </div>
+  </div></div>
 </template>
 
 <script>

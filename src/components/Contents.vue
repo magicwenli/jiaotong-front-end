@@ -1,14 +1,16 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-12 16:27:09
+ * @LastEditTime : 2021-07-13 11:14:51
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
-  <div class="flex-col bg-gray-200 py-1 -my-1 w-full">
-    <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
+  <div class="bg-gray-200">
+    <div class="flex-col py-1 -my-1 w-full mx-auto md:max-w-3/4 lg:max-w-1/2">
+      <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
+    </div>
   </div>
 </template>
 
