@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-13 09:27:50
+ * @LastEditTime : 2021-07-13 14:18:15
  * @Description  : 
  * @FilePath     : /front-end/src/views/Login.vue
 -->
@@ -117,7 +117,7 @@ export default {
           }).then((data) => {
             //登录失败,先不讨论
             console.log(data);
-            if (data.data.status != 200) {
+            if (data.status != 200) {
               //iViewUi的友好提示
               ElMessage({
                 showClose: true,
