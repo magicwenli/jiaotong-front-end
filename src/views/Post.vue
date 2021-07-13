@@ -35,13 +35,17 @@
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :on-change="handleChange"
+          :on-exceed="handleExceed"
           :file-list="fileList"
+          :limit="1"
           list-type="picture"
+          accept="image/png, image/jpeg, image/gif"
+          v-loading="compressing"
         >
           <el-button class="" size="small" type="primary">上传图片</el-button>
           <template #tip>
             <div class="el-upload__tip">
-              只能上传 jpg/png 文件，且不超过 500kb
+              只能上传最多一张 jpg/png/png 图片，图片会被压缩
             </div>
           </template>
         </el-upload>
@@ -71,7 +75,7 @@ function compress(file) {
       canvas.toBlob(newFile => {
         URL.revokeObjectURL(fileUrl)
         resolve(newFile)
-      }, 'image/jpeg', 0.5)
+      }, 'image/jpeg')
     }
     image.onerror = () => reject('无法读取图片文件')
   })
@@ -82,6 +86,8 @@ export default {
     return {
       textarea2: "",
       fileList: [],
+      compressing: false,
+      compressedFile: null
     };
   },
   methods: {
@@ -89,13 +95,24 @@ export default {
       return Converter.makeHtml(text);
     },
     handleRemove(file, fileList) {
-      this.fileList = fileList;
+      this.fileList = fileList
+      this.compressedFile = null
     },
     handlePreview(file) {
       console.log(file);
     },
-    handleChange(file, fileList) {
-      this.fileList = fileList;
+    async handleChange(file, fileList) {
+      this.fileList = fileList
+      this.compressing = true
+      try {
+        this.compressedFile = await compress(file.raw)
+      } catch (e) {
+        this.$message.error(String(e))
+      }
+      this.compressing = false
+    },
+    handleExceed() {
+      this.$message.error('最多只能上传一张图片')
     }
   },
   components: [],
