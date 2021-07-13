@@ -1,24 +1,28 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:09:40
- * @LastEditTime : 2021-07-08 11:24:24
+ * @LastEditTime : 2021-07-13 11:15:49
  * @Description  :  
  * @FilePath     : /front-end/src/components/Banner.vue
 -->
 <template>
-  <nav
-    @click.prevent
-    class="flex flex-row flex-nowrap overflow-scroll">
-    <div
-      v-for="label in labels"
-      :key="label.id"
-      class="flex-none text-gray-900 px-4 p-4 h-full"
-    >
-      <router-link :to="label.url" @click="makeActive(label.id)" class="tracking-wider">
-        {{ label.name }}
-      </router-link>
-    </div>
-  </nav>
+  <div class="mx-auto md:max-w-3/4 lg:max-w-1/2">
+    <nav @click.prevent class="flex flex-row flex-nowrap overflow-scroll">
+      <div
+        v-for="label in labels"
+        :key="label.id"
+        class="flex-none text-gray-900 px-4 p-4 h-full"
+      >
+        <router-link
+          :to="label.url"
+          @click="makeActive(label.id)"
+          class="tracking-wider"
+        >
+          {{ label.name }}
+        </router-link>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
