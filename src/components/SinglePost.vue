@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-14 10:20:24
+ * @LastEditTime : 2021-07-14 11:37:57
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -73,8 +73,15 @@
         </router-link>
       </div>
       <div class="flex pt-4 space-x-2">
-        <div class="flex-1 rounded-3xl bg-green-100">
-        <LikeBtn/><span>&ensp;123</span></div>
+        <div class="flex items-center justify-center rounded-3xl bg-green-100" @click="changeLikeBtn()">
+          <LikeBtn
+            :width="40"
+            :height="40"
+            :checked="likeBtnChecked"
+            class="flex"
+          />
+          <span class="-ml-4 mr-4">&ensp;123</span>
+        </div>
         <button class="flex-1 rounded-3xl bg-green-100">
           <i class="far fa-thumbs-up"></i>
           <span>&ensp;123</span>
@@ -109,7 +116,7 @@ import LikeBtn from "./LikeBtn.vue";
 export default {
   components: {
     Comments,
-    LikeBtn
+    LikeBtn,
   },
   props: ["pid", "muid", "hasImg", "img", "content", "createTime", "labels"],
   methods: {
@@ -120,6 +127,9 @@ export default {
     emailHash(email) {
       return "https://gravatar.loli.net/avatar/" + md5(email) + "?d=monsterid";
     },
+    changeLikeBtn() {
+      this.likeBtnChecked = !this.likeBtnChecked;
+    },
     init() {
       this.loading = false;
     },
@@ -128,19 +138,20 @@ export default {
     return {
       loading: true,
       showComments: false,
+      likeBtnChecked: false,
     };
   },
   mounted() {
     this.init();
   },
-  computed:{
-    preImgList(){
+  computed: {
+    preImgList() {
       var list = [];
-      list.push(this.img)
+      list.push(this.img);
       console.log(list);
-      return list
-    }
-  }
+      return list;
+    },
+  },
 };
 </script>
 
