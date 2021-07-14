@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-14 09:50:37
+ * @LastEditTime : 2021-07-14 10:20:24
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -73,12 +73,9 @@
         </router-link>
       </div>
       <div class="flex pt-4 space-x-2">
-        <el-checkbox-button label="up">
-          <i class="far fa-thumbs-up"></i>
-          <span>&ensp;123</span>
-        </el-checkbox-button>
-
-        <button type="" class="flex-1 rounded-3xl bg-green-100">
+        <div class="flex-1 rounded-3xl bg-green-100">
+        <LikeBtn/><span>&ensp;123</span></div>
+        <button class="flex-1 rounded-3xl bg-green-100">
           <i class="far fa-thumbs-up"></i>
           <span>&ensp;123</span>
         </button>
@@ -107,10 +104,12 @@
 import Comments from "./Comments.vue";
 import formatTime from "../utils/TimeFormater.vue";
 import md5 from "js-md5";
+import LikeBtn from "./LikeBtn.vue";
 
 export default {
   components: {
     Comments,
+    LikeBtn
   },
   props: ["pid", "muid", "hasImg", "img", "content", "createTime", "labels"],
   methods: {
