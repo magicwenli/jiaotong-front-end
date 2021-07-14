@@ -16,7 +16,7 @@
 
 <script>
 import SinglePost from "./SinglePost.vue";
-import API from "../utils/API.vue";
+import { getPostsByTag } from "../utils/api/posts.js";
 
 export default {
   components: {
@@ -27,14 +27,13 @@ export default {
       posts: null,
     };
   },
-  mounted() {
-    API.get("/posts")
-      .then((response) => {
-        console.log(response);
-        this.posts = response[0].posts
-        console.log(this.posts)
-      })
-      .catch((error) => console.log(error));
+  async mounted() {
+    try {
+      const data = await getPostsByTag('timeline', 1, 10);
+      this.posts = data[0].posts;
+    } catch (e) {
+      this.$message.error('获取帖子列表失败：' + e);
+    }
   },
 };
 </script>

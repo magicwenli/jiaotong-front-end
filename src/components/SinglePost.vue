@@ -85,7 +85,7 @@
     </div>
     <div class="pt-4 overflow-hidden">
       <transition name="comments">
-        <Comments v-if="showComments"/>
+        <Comments v-if="showComments" :pid="pid"/>
       </transition>
     </div>
   </el-card>
