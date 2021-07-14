@@ -20,9 +20,9 @@
         </div>
         <div class="content">{{ comment.content }}</div>
         <div class="buttons">
-          <el-button class="button" type="text"><i class="far fa-thumbs-up"></i> 赞</el-button>
-          <el-button class="button" type="text" @click="reply(comment.floor)"><i class="fas fa-reply"></i> 回复</el-button>
-          <el-button class="button" type="text"><i class="far fa-thumbs-down"></i> 踩</el-button>
+          <el-button class="button button-off" type="text"><i class="far fa-thumbs-up"></i> 赞</el-button>
+          <el-button class="button button-off" type="text" @click="reply(comment.floor)"><i class="fas fa-reply"></i> 回复</el-button>
+          <el-button class="button button-off" type="text"><i class="far fa-thumbs-down"></i> 踩</el-button>
         </div>
         <el-divider/>
       </div>
@@ -33,7 +33,7 @@
     </div>
     <el-pagination layout="prev, pager, next" :page-size="pageSize" :total="total" :current-page="page" @current-change="turn"/>
     <div class="submit">
-      <el-input ref="input" size="medium" placeholder="请输入评论内容..." v-model="replying"/>
+      <el-input ref="input" type="textarea" :rows="1" autosize size="medium" placeholder="请输入评论内容..." v-model="replying"/>
       <el-button class="submit-button" size="medium" type="primary">发布</el-button>
     </div>
   </el-card>
@@ -107,6 +107,19 @@ export default {
 .button {
   padding: 0;
   min-height: auto;
+}
+
+.button-off,
+.button-off:focus {
+  color: #404040;
+}
+
+.button-off:hover {
+  color: #808080;
+}
+
+.button-off:active {
+  color: #aaaaaa;
 }
 
 .title {
