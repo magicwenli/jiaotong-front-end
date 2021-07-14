@@ -10,7 +10,7 @@
   <div>
     <input
       type="checkbox"
-      class="checkbox"
+      class="checkbox hidden"
       :checked="checked"
     />
     <label for="checkbox">
