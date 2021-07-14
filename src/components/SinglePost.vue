@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-14 11:37:57
+ * @LastEditTime : 2021-07-14 16:02:47
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -73,14 +73,41 @@
         </router-link>
       </div>
       <div class="flex pt-4 space-x-2">
-        <div class="flex items-center justify-center rounded-3xl bg-green-100" @click="changeLikeBtn()">
+        <div
+          class="
+            flex flex-1
+            items-center
+            justify-center
+            rounded-3xl
+            bg-green-100
+          "
+          @click.prevent="changeLikeBtn()"
+        >
           <LikeBtn
             :width="40"
             :height="40"
             :checked="likeBtnChecked"
-            class="flex"
+            class="flex -mr-4"
           />
-          <span class="-ml-4 mr-4">&ensp;123</span>
+          <span class="mr-4">&ensp;123</span>
+        </div>
+        <div
+          class="
+            flex flex-1
+            items-center
+            justify-center
+            rounded-3xl
+            bg-green-100
+          "
+          @click.prevent="changeFavBtn()"
+        >
+          <FavBtn
+            :width="22"
+            :height="22"
+            :checked="favBtnChecked"
+            class="flex -mr-4"
+          />
+          <span class="mr-4">&ensp;123</span>
         </div>
         <button class="flex-1 rounded-3xl bg-green-100">
           <i class="far fa-thumbs-up"></i>
@@ -100,7 +127,7 @@
       </div>
       <div class="pt-4 overflow-hidden">
         <transition name="comments">
-          <Comments v-if="showComments" :pid="pid" :muid="muid"/>
+          <Comments v-if="showComments" :pid="pid" :muid="muid" />
         </transition>
       </div>
     </el-card>
@@ -112,11 +139,13 @@ import Comments from "./Comments.vue";
 import formatTime from "../utils/TimeFormater.vue";
 import md5 from "js-md5";
 import LikeBtn from "./LikeBtn.vue";
+import FavBtn from "./FavBtn.vue";
 
 export default {
   components: {
     Comments,
     LikeBtn,
+    FavBtn,
   },
   props: ["pid", "muid", "hasImg", "img", "content", "createTime", "labels"],
   methods: {
@@ -130,6 +159,9 @@ export default {
     changeLikeBtn() {
       this.likeBtnChecked = !this.likeBtnChecked;
     },
+    changeFavBtn() {
+      this.favBtnChecked = !this.favBtnChecked;
+    },
     init() {
       this.loading = false;
     },
@@ -139,6 +171,7 @@ export default {
       loading: true,
       showComments: false,
       likeBtnChecked: false,
+      favBtnChecked: false,
     };
   },
   mounted() {
@@ -155,7 +188,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .comments-enter-active,
 .comments-leave-active {
   transition: all 0.5s;

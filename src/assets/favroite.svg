@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg class="bookmark" fill="#fff" width="48" height="61" viewBox="0 0 48 61" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <path d="M 0 4C 0 1.79086 1.79086 0 4 0L 24 0C 24 0 24 0 24 0L 44 0C 46.2091 0 48 1.79086 48 4L 48 56.5259C 48 59.7207 44.4394 61.6263 41.7812 59.8541L 26.2188 49.4792C 24.8752 48.5835 23.1248 48.5835 21.7812 49.4792L 6.2188 59.8541C 3.56058 61.6263 0 59.7207 0 56.5259L 0 4Z" />
+</svg>

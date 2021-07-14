@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-14 10:15:44
- * @LastEditTime : 2021-07-14 16:03:42
+ * @LastEditTime : 2021-07-14 16:03:59
  * @Description  : 
- * @FilePath     : /front-end/src/components/LikeBtn.vue
+ * @FilePath     : /front-end/src/components/FavBtn.vue
 -->
 
 <template>
@@ -15,7 +15,7 @@
     />
     <label for="checkbox">
       <svg
-        class="heart-svg"
+        class="bookmark-svg"
         :width="width"
         :height="height"
         viewBox="467 392 58 57"
@@ -28,8 +28,8 @@
           transform="translate(467 392)"
         >
           <path
-            d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z"
-            class="heart"
+            d="M 0 4C 0 1.79086 1.79086 0 4 0L 24 0C 24 0 24 0 24 0L 44 0C 46.2091 0 48 1.79086 48 4L 48 56.5259C 48 59.7207 44.4394 61.6263 41.7812 59.8541L 26.2188 49.4792C 24.8752 48.5835 23.1248 48.5835 21.7812 49.4792L 6.2188 59.8541C 3.56058 61.6263 0 59.7207 0 56.5259L 0 4Z"
+            class="bookmark"
             fill="#AAB8C2"
           />
           <circle
@@ -92,9 +92,9 @@ svg {
   cursor: pointer;
   overflow: visible;
   width: 60px;
-  .heart {
+  .bookmark {
     transform-origin: center;
-    animation: animateHeartOut 0.3s linear forwards;
+    animation: animateBookmarkOut 0.3s linear forwards;
   }
   .main-circ {
     transform-origin: 29.5px 29.5px;
@@ -106,10 +106,10 @@ svg {
 }
 
 .checkbox:checked + label svg {
-  .heart {
+  .bookmark {
     transform: scale(0.2);
-    fill: #e2264d;
-    animation: animateHeart 0.3s linear forwards 0.25s;
+    fill: rgb(253,159,17);
+    animation: animateBookmark 0.3s linear forwards 0.25s;
   }
   .main-circ {
     transition: all 2s;
@@ -286,7 +286,7 @@ svg {
   }
 }
 
-@keyframes animateHeart {
+@keyframes animateBookmark {
   0% {
     transform: scale(0.2);
   }
@@ -298,7 +298,7 @@ svg {
   }
 }
 
-@keyframes animateHeartOut {
+@keyframes animateBookmarkOut {
   0% {
     transform: scale(1.4);
   }
