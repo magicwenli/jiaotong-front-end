@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-14 16:02:47
+ * @LastEditTime : 2021-07-14 16:50:04
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -181,7 +181,7 @@ export default {
     preImgList() {
       var list = [];
       list.push(this.img);
-      console.log(list);
+      // console.log(list);
       return list;
     },
   },

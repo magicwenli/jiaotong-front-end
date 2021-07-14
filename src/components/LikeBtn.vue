@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-14 10:15:44
- * @LastEditTime : 2021-07-14 16:03:42
+ * @LastEditTime : 2021-07-14 16:50:34
  * @Description  : 
  * @FilePath     : /front-end/src/components/LikeBtn.vue
 -->
@@ -10,7 +10,7 @@
   <div>
     <input
       type="checkbox"
-      class="checkbox"
+      class="checkbox hidden"
       :checked="checked"
     />
     <label for="checkbox">
