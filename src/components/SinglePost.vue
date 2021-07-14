@@ -93,7 +93,7 @@
       </div>
       <div class="pt-4 overflow-hidden">
         <transition name="comments">
-          <Comments v-if="showComments" />
+          <Comments v-if="showComments" :pid="pid" :muid="muid"/>
         </transition>
       </div>
     </el-card>
