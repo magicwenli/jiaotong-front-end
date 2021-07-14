@@ -47,7 +47,7 @@ import md5 from 'js-md5'
 export default {
   props: {
     pid: Number,
-    muid: Number
+    muid: String
   },
   data() {
     return {
