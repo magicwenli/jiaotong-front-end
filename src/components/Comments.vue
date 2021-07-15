@@ -33,7 +33,7 @@
     </div>
     <el-pagination layout="prev, pager, next" :page-size="pageSize" :total="total" :current-page="page" @current-change="turn"/>
     <div class="submit">
-      <el-input ref="input" type="textarea" :rows="1" autosize size="medium" placeholder="请输入评论内容..." v-model="replying"/>
+      <el-input ref="input" type="textarea" :rows="1" autosize size="medium" placeholder="请输入评论内容" v-model="replying"/>
       <el-button class="submit-button" size="medium" type="primary">发布</el-button>
     </div>
   </el-card>
