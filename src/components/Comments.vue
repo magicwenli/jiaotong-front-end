@@ -20,18 +20,29 @@
         </div>
         <div class="content">{{ comment.content }}</div>
         <div class="buttons">
-          <el-button class="button button-off" type="text"
-            ><i class="far fa-thumbs-up"></i> 赞</el-button
-          >
+          <el-button class="button button-off" type="text">
+            <i class="far fa-thumbs-up"></i> 赞
+          </el-button>
           <el-button
             class="button button-off"
             type="text"
-            @click="reply(comment.floor)"
-            ><i class="fas fa-reply"></i> 回复</el-button
-          >
-          <el-button class="button button-off" type="text"
-            ><i class="far fa-thumbs-down"></i> 踩</el-button
-          >
+            @click="reply(comment.floor)">
+            <i class="fas fa-reply"></i> {{ comment.floor == replyFloor ? "收起" : "" }}回复
+          </el-button>
+          <el-button class="button button-off" type="text">
+            <i class="far fa-thumbs-down"></i> 踩
+          </el-button>
+        </div>
+        <div v-if="comment.floor == replyFloor" class="submit">
+          <el-input
+            ref="input"
+            type="textarea"
+            :rows="1"
+            autosize
+            size="medium"
+            :placeholder="'回复' + comment.floor + '楼'"
+            v-model="replyText" />
+          <el-button class="submit-button" size="medium" type="primary">回复</el-button>
         </div>
         <el-divider />
       </div>
@@ -45,21 +56,16 @@
       :page-size="pageSize"
       :total="total"
       :current-page="page"
-      @current-change="turn"
-    />
+      @current-change="turn" />
     <div class="submit">
       <el-input
-        ref="input"
         type="textarea"
         :rows="1"
         autosize
         size="medium"
-        placeholder="请输入评论内容..."
-        v-model="replying"
-      />
-      <el-button class="submit-button" size="medium" type="primary"
-        >发布</el-button
-      >
+        placeholder="发布评论"
+        v-model="commentText" />
+      <el-button class="submit-button" size="medium" type="primary">发布</el-button>
     </div>
   </el-card>
 </template>
@@ -80,7 +86,9 @@ export default {
       pageSize: 10,
       total: 0,
       page: 1,
-      replying: "",
+      commentText: "",
+      replyFloor: 0,
+      replyText: "",
     };
   },
   methods: {
@@ -116,9 +124,12 @@ export default {
       );
     },
     reply(floor) {
-      this.replying = "回复" + floor + "楼：";
-      this.$el.scrollIntoView(false);
-      this.$refs.input.focus();
+      this.replyText = "";
+      if (this.replyFloor == floor) {
+        this.replyFloor = 0;
+      } else {
+        this.replyFloor = floor;
+      }
     },
   },
   async mounted() {
