@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./utils/Route";
-import { VueShowdownPlugin } from 'vue-showdown';
 import { createStore } from 'vuex'
 import './css/index.css'
 
@@ -97,14 +96,6 @@ const store = createStore({
 
 const app = createApp(App)
 
-app.use(VueShowdownPlugin, {
-    // 设置 showdown 默认 flavor
-    flavor: 'github',
-    // 设置 showdown 默认 options （会覆盖上面 flavor 的 options）
-    options: {
-        emoji: true,
-    },
-});
 
 components.forEach(component => {
     app.component(component.name, component)
