@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-14 16:50:04
+ * @LastEditTime : 2021-07-15 09:34:50
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -50,7 +50,7 @@
             </div>
           </template>
         </el-image>
-        <p class="text-justify pt-2 font-serif" style="text-indent: 2em">
+        <p class="text-justify pt-2" style="text-indent: 2em">
           {{ content }}
         </p>
       </div>
@@ -73,15 +73,17 @@
         </router-link>
       </div>
       <div class="flex pt-4 space-x-2">
-        <div
+        <button
           class="
             flex flex-1
             items-center
             justify-center
             rounded-3xl
             bg-green-100
+            cursor-pointer
+            shadow-sm
           "
-          @click.prevent="changeLikeBtn()"
+          @click="changeLikeBtn()"
         >
           <LikeBtn
             :width="40"
@@ -90,14 +92,15 @@
             class="flex -mr-4"
           />
           <span class="mr-4">&ensp;123</span>
-        </div>
-        <div
+        </button>
+        <button
           class="
             flex flex-1
             items-center
             justify-center
             rounded-3xl
             bg-green-100
+            cursor-pointer
           "
           @click.prevent="changeFavBtn()"
         >
@@ -108,17 +111,14 @@
             class="flex -mr-4"
           />
           <span class="mr-4">&ensp;123</span>
-        </div>
-        <button class="flex-1 rounded-3xl bg-green-100">
-          <i class="far fa-thumbs-up"></i>
-          <span>&ensp;123</span>
         </button>
+
         <!-- <button class="flex-1 rounded-3xl bg-green-100">
         <i class="far fa-thumbs-down"></i>
         <span>&ensp;456</span>
       </button> -->
         <button
-          class="flex-1 rounded-3xl bg-green-100"
+          class="flex-1 rounded-3xl bg-green-100 shadow-sm"
           @click="showComments = !showComments"
         >
           <i class="fas fa-reply"></i>
