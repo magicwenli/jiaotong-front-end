@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-13 09:57:26
- * @LastEditTime : 2021-07-13 11:18:52
+ * @LastEditTime : 2021-07-15 10:12:35
  * @Description  : 
  * @FilePath     : /front-end/src/views/UserInfo.vue
 -->
@@ -17,8 +17,15 @@
             </h2>
             <p class="mt-2 text-sm text-gray-600">Welcome</p>
           </div>
+
+          <div class="pt-12">
+            <el-button type="primary" class="w-8/12" @click="toFavorite"
+              >我的收藏</el-button
+            >
+          </div>
+
           <div class="">
-            <el-button type="primary" class="w-full" @click="logOut"
+            <el-button type="danger" class="w-8/12" @click="logOut"
               >退出登录</el-button
             >
           </div>
@@ -55,6 +62,10 @@ export default {
       ElMessage({ showClose: true, message: "退出登录" });
       this.$router.push("/");
     },
+    toFavorite(){
+      console.log("to favorite");
+      this.$router.push({ path: '/', query: { tag: 'userFavorites' } })
+    }
   },
 };
 </script>
