@@ -10,9 +10,9 @@
       <div v-for="(comment, k) in comments" :key="k">
         <div class="title">
           <div class="user">
-            <el-image class="avatar" :src="emailHash(comment.muid)" lazy/>
+            <el-image class="avatar" :src="emailHash(comment.muid)" lazy />
             <div>
-              <div>{{ comment.muid == muid ? '洞主' : comment.muid }}</div>
+              <div>{{ comment.muid == muid ? "洞主" : comment.muid }}</div>
               <div>{{ formatTime(comment.createTime) }}</div>
             </div>
           </div>
@@ -20,34 +20,59 @@
         </div>
         <div class="content">{{ comment.content }}</div>
         <div class="buttons">
-          <el-button class="button button-off" type="text"><i class="far fa-thumbs-up"></i> 赞</el-button>
-          <el-button class="button button-off" type="text" @click="reply(comment.floor)"><i class="fas fa-reply"></i> 回复</el-button>
-          <el-button class="button button-off" type="text"><i class="far fa-thumbs-down"></i> 踩</el-button>
+          <el-button class="button button-off" type="text"
+            ><i class="far fa-thumbs-up"></i> 赞</el-button
+          >
+          <el-button
+            class="button button-off"
+            type="text"
+            @click="reply(comment.floor)"
+            ><i class="fas fa-reply"></i> 回复</el-button
+          >
+          <el-button class="button button-off" type="text"
+            ><i class="far fa-thumbs-down"></i> 踩</el-button
+          >
         </div>
-        <el-divider/>
+        <el-divider />
       </div>
     </div>
     <div v-else>
       <div>暂无评论</div>
-      <el-divider/>
+      <el-divider />
     </div>
-    <el-pagination layout="prev, pager, next" :page-size="pageSize" :total="total" :current-page="page" @current-change="turn"/>
+    <el-pagination
+      layout="prev, pager, next"
+      :page-size="pageSize"
+      :total="total"
+      :current-page="page"
+      @current-change="turn"
+    />
     <div class="submit">
-      <el-input ref="input" type="textarea" :rows="1" autosize size="medium" placeholder="请输入评论内容..." v-model="replying"/>
-      <el-button class="submit-button" size="medium" type="primary">发布</el-button>
+      <el-input
+        ref="input"
+        type="textarea"
+        :rows="1"
+        autosize
+        size="medium"
+        placeholder="请输入评论内容..."
+        v-model="replying"
+      />
+      <el-button class="submit-button" size="medium" type="primary"
+        >发布</el-button
+      >
     </div>
   </el-card>
 </template>
 
 <script>
-import { getCommentsOfPost } from '../utils/api/comments.js'
-import formatTime from '../utils/TimeFormater.vue'
-import md5 from 'js-md5'
+import { getCommentsOfPost } from "../utils/api/comments.js";
+import formatTime from "../utils/TimeFormater.vue";
+import md5 from "js-md5";
 
 export default {
   props: {
     pid: Number,
-    muid: String
+    muid: String,
   },
   data() {
     return {
@@ -55,46 +80,51 @@ export default {
       pageSize: 10,
       total: 0,
       page: 1,
-      replying: ''
-    }
+      replying: "",
+    };
   },
   methods: {
     async loadComments() {
       try {
-        const data = await getCommentsOfPost(this.pid, 1, 10)
-        this.comments = data[0].comments
+        const data = await getCommentsOfPost(this.pid, 1, 10);
+        this.comments = data[0].comments;
         this.comments.push({
-          content: 'Hello world!',
-          createTime: '2021-01-01 00:00:00',
+          content: "Hello world!",
+          createTime: "2021-01-01 00:00:00",
           floor: -1,
           info: [{ likes: 100, dislikes: 100 }],
-          muid: this.muid
-        })
-        this.total = data[0].comments.length
+          muid: this.muid,
+        });
+        this.total = data[0].comments.length;
       } catch (e) {
-        this.$message.error('获取评论列表失败：' + e)
+        this.$message.error("获取评论列表失败：" + e);
       }
     },
     async turn(page) {
-      this.page = page
-      await this.loadComments()
+      this.page = page;
+      await this.loadComments();
     },
     formatTime(time) {
-      return formatTime(new Date(time).getTime() / 1000)
+      return formatTime(new Date(time).getTime() / 1000);
     },
     emailHash(email) {
-      return "https://gravatar.loli.net/avatar/" + md5(email) + "?d=monsterid";
+      return (
+        import.meta.env.VITE_GRAVATAR_URL +
+        md5(email) +
+        "?d=" +
+        import.meta.env.VITE_GRAVATAR_TYPE
+      );
     },
     reply(floor) {
-      this.replying = '回复' + floor + '楼：'
-      this.$el.scrollIntoView(false)
-      this.$refs.input.focus()
-    }
+      this.replying = "回复" + floor + "楼：";
+      this.$el.scrollIntoView(false);
+      this.$refs.input.focus();
+    },
   },
   async mounted() {
-    await this.loadComments()
-  }
-}
+    await this.loadComments();
+  },
+};
 </script>
 
 <style scoped>

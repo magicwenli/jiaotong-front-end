@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-07 16:01:04
- * @LastEditTime : 2021-07-08 15:41:31
+ * @LastEditTime : 2021-07-15 10:48:33
  * @Description  : 
  * @FilePath     : /front-end/src/utils/API.vue
 -->
@@ -10,7 +10,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-    baseURL: `http://124.70.111.3:7300/mock/60e6ab6c579b09002106eded/api`,
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
         // 'Authorization': "JWT " + localStorage.getItem('token')

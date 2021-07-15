@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-15 09:34:50
+ * @LastEditTime : 2021-07-15 10:57:08
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -154,7 +154,12 @@ export default {
       return newDate;
     },
     emailHash(email) {
-      return "https://gravatar.loli.net/avatar/" + md5(email) + "?d=monsterid";
+      return (
+        import.meta.env.VITE_GRAVATAR_URL +
+        md5(email) +
+        "?d=" +
+        import.meta.env.VITE_GRAVATAR_TYPE
+      );
     },
     changeLikeBtn() {
       this.likeBtnChecked = !this.likeBtnChecked;
