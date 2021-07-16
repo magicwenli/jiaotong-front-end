@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-16 11:30:10
+ * @LastEditTime : 2021-07-16 14:53:43
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
@@ -71,6 +71,24 @@
 import { showdown } from "vue-showdown";
 import showdownHighlight from "showdown-highlight";
 
+showdown.setFlavor("github"); //original
+showdown.setOption("emoji", true);
+showdown.setOption("simplifiedAutoLink", true);
+showdown.setOption("simpleLineBreaks", true);
+
+// import hljs from 'highlight.js';
+// import 'highlight.js/styles/github.css';
+
+var Converter = new showdown.Converter({
+  // That's it
+  extensions: [
+    showdownHighlight({
+      // Whether to add the classes to the <pre> tag
+      pre: true,
+    }),
+  ],
+});
+
 function compress(file) {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement("canvas");
@@ -91,24 +109,12 @@ function compress(file) {
   });
 }
 
-showdown.setFlavor("github"); //original
-showdown.setOption("emoji", true);
-showdown.setOption("simplifiedAutoLink", true);
-showdown.setOption("simpleLineBreaks", true);
-var Converter = new showdown.Converter({
-  // That's it
-  extensions: [
-    showdownHighlight({
-      // Whether to add the classes to the <pre> tag
-      pre: true,
-    }),
-  ],
-});
+
 
 export default {
   data() {
     return {
-      textarea2: "```dustsdfa\nprint(fff)\n1232144\nfs\n```",
+      textarea2: "$a=\\frac{1}{12}$",
       // textarea2: "",
       fileList: [],
       compressing: false,
