@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card :body-style="{ padding: '0.5rem' }">
     <template #header>
       <div class="header">
         <b>{{ total }}条评论</b>

@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-16 10:09:30
+ * @LastEditTime : 2021-07-16 16:15:49
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -59,13 +59,13 @@
           class="
             px-2
             bg-color-10
-            rounded-tr-md
-            ring-2 ring-offset-2 ring-color-10
+            rounded-sm
+            ring-2 ring-offset-1 ring-color-10
             text-sm
           "
         >
-          <span class="text-color-11 text-base font-bold">#</span
-          >{{ label.name }}
+          <!-- <span class="text-color-11 text-base font-bold">#</span> -->
+          {{ label.name }}
         </router-link>
       </div>
       <div class="flex pt-4 space-x-2">
@@ -77,7 +77,7 @@
             rounded-3xl
             bg-color-8
             cursor-pointer
-            shadow-sm
+            shadow-md
           "
           @click="changeLikeBtn()"
         >
@@ -97,6 +97,7 @@
             rounded-3xl
             bg-color-8
             cursor-pointer
+            shadow-md
           "
           @click.prevent="changeFavBtn()"
         >
@@ -110,7 +111,7 @@
         </button>
 
         <button
-          class="flex-1 rounded-3xl bg-color-8 shadow-sm"
+          class="flex-1 rounded-3xl bg-color-8 shadow-md"
           @click="showComments = !showComments"
         >
           <i class="fas fa-reply"></i>

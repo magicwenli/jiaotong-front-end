@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 21:20:15
- * @LastEditTime : 2021-07-16 09:20:58
+ * @LastEditTime : 2021-07-16 16:01:02
  * @Description  : 
  * @FilePath     : /front-end/src/views/_Base.vue
 -->
@@ -14,7 +14,7 @@
           <div class="flex-initial">
             <h2 class="text-center text-2xl font-extrabold text-color-1">
               <slot name="headline">
-                <a class="fas fa-sign-in-alt" />&ensp; 登录
+                <a class="fas fa-sign-in-alt text-color-1" />&ensp; 登录
               </slot>
             </h2>
             <p class="mt-2 text-center text-sm text-color-2">

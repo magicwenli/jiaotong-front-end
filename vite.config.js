@@ -36,17 +36,18 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: p => p.replace(/^\/api/, '')
       }
-    }
+    },
+    host: '0.0.0.0'
   },
   build: {
 		rollupOptions: {
 			output: {
 				//解决打包时Some chunks are larger警告
-				manualChunks(id) {
-					if (id.includes('node_modules')) {
-						return id.toString().split('node_modules/')[1].split('/')[0].toString();
-					}
-				}
+				// manualChunks(id) {
+				// 	if (id.includes('node_modules')) {
+				// 		return id.toString().split('node_modules/')[1].split('/')[0].toString();
+				// 	}
+				// }
 			}
 		}
 	}
