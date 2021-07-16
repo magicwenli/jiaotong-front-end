@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:09:40
- * @LastEditTime : 2021-07-13 11:15:49
+ * @LastEditTime : 2021-07-15 17:01:04
  * @Description  :  
  * @FilePath     : /front-end/src/components/Banner.vue
 -->
@@ -11,7 +11,7 @@
       <div
         v-for="label in labels"
         :key="label.id"
-        class="flex-none text-gray-900 px-4 p-4 h-full"
+        class="flex-none text-color-1 px-4 p-4 h-full"
       >
         <router-link
           :to="label.url"

@@ -1,13 +1,13 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-14 09:30:35
+ * @LastEditTime : 2021-07-16 09:19:33
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
-  <div class="bg-gray-200">
+  <div class="bg-color-7">
     <div class="flex-col py-1 -my-1 w-full mx-auto md:max-w-3/4 lg:max-w-1/2">
       <ul
         class="infinite-list"

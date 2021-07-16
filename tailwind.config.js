@@ -5,11 +5,16 @@ module.exports = {
     extend: {
       boxShadow: ['active'],
       colors: {
-        'color-1': '#0f0b26',
-        'color-2': '#522421',
-        'color-3': '#8c5a2e',
-        'color-4': '#bf8641',
-        'color-5': '#b3b372',
+        'color-1': '#0f0b26',   // 正文字体
+        'color-2': '#522421',   // 弱一点的正文
+        'color-3': '#8c5a2e',   // 预留
+        'color-4': '#0f0b26',   // a 标签
+        'color-5': '#7C83FD',   // # 符号
+        'color-6': '#7C83FD',   // 前景
+        'color-7': '#7DEDFF',   // 背景
+        'color-8': '#96BAFF',   // 按键背景
+        'color-9': '#522421',   // 按键字体
+
       },
     },
     maxWidth: {

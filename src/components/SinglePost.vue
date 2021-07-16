@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-15 10:57:08
+ * @LastEditTime : 2021-07-16 09:30:01
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -10,7 +10,7 @@
   <li>
     <el-card
       :body-style="{ padding: '0px' }"
-      class="bg-gray-50 shadow-md p-4 m-2"
+      class="bg-color-7 shadow-md p-4 m-2"
       v-loading="loading"
     >
       <div class="flex flex-row relative">
@@ -23,12 +23,9 @@
         />
         <div class="flex-row px-4 text-left text-md">
           <div>
-            <span class="font-bold text-gray-900 font-sans"
-              ><span class="text-purple-500">#&ensp;</span>{{ pid }}</span
+            <span class="font-bold text-color-1 font-sans"
+              ><span class="text-color-5">#&ensp;</span>{{ pid }}</span
             >
-            <!-- <a href="" class="h-4">
-              <i class="absolute right-0 far fa-thumbs-up"></i>
-        </a> -->
           </div>
           <div>
             <span class="font-light">{{ formatTimeData(createTime) }}</span>
@@ -62,13 +59,13 @@
           class="
             px-2
             border-green-900
-            bg-blue-100
+            bg-color-6
             rounded-tr-md
-            ring-2 ring-offset-2 ring-blue-400
+            ring-2 ring-offset-2 ring-color-6
             text-sm
           "
         >
-          <span class="text-purple-500 text-base font-bold">#</span
+          <span class="text-color-5 text-base font-bold">#</span
           >{{ label.name }}
         </router-link>
       </div>
@@ -79,7 +76,7 @@
             items-center
             justify-center
             rounded-3xl
-            bg-green-100
+            bg-color-6
             cursor-pointer
             shadow-sm
           "
@@ -99,7 +96,7 @@
             items-center
             justify-center
             rounded-3xl
-            bg-green-100
+            bg-color-6
             cursor-pointer
           "
           @click.prevent="changeFavBtn()"
@@ -113,12 +110,8 @@
           <span class="mr-4">&ensp;123</span>
         </button>
 
-        <!-- <button class="flex-1 rounded-3xl bg-green-100">
-        <i class="far fa-thumbs-down"></i>
-        <span>&ensp;456</span>
-      </button> -->
         <button
-          class="flex-1 rounded-3xl bg-green-100 shadow-sm"
+          class="flex-1 rounded-3xl bg-color-6 shadow-sm"
           @click="showComments = !showComments"
         >
           <i class="fas fa-reply"></i>

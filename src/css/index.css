@@ -28,7 +28,7 @@
         @apply text-lg font-normal;
       }
       a {
-          @apply text-indigo-600 hover:underline;
+          @apply text-color-4 hover:underline;
       }
 
       button{

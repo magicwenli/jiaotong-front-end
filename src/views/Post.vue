@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-15 16:38:43
+ * @LastEditTime : 2021-07-16 09:22:05
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
@@ -11,15 +11,15 @@
     <div class="flex flex-col mx-4 mt-4">
       <el-form>
         <div class="flex flex-row mt-4">
-          <router-link class="text-gray-900 text-lg my-auto" to="/"
+          <router-link class="text-color-1 text-lg my-auto" to="/"
             ><i class="el-icon-arrow-left"></i>返回</router-link
           >
           <div class="flex-grow my-auto">
-            <h2 class="text-center text-xl font-extrabold text-gray-900">
+            <h2 class="text-center text-xl font-extrabold text-color-1">
               发布动态
             </h2>
           </div>
-          <router-link class="text-gray-900 text-lg my-auto" to="/"
+          <router-link class="text-color-1 text-lg my-auto" to="/"
             ><i class="el-icon-check"></i>发布</router-link
           >
         </div>
@@ -58,7 +58,7 @@
         </div>
         <div class="flex flex-col my-4">
           <div class="mr-auto">Preview:</div>
-          <div class="rounded-md bg-gray-50 block text-left">
+          <div class="rounded-md bg-color-7 block text-left">
             <div v-html="md2Html(textarea2)"></div>
           </div>
         </div>

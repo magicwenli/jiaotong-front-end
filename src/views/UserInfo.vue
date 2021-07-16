@@ -1,21 +1,21 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-13 09:57:26
- * @LastEditTime : 2021-07-15 10:46:30
+ * @LastEditTime : 2021-07-15 17:03:31
  * @Description  : 
  * @FilePath     : /front-end/src/views/UserInfo.vue
 -->
 
 <template>
-  <div class="bg-gray-50">
+  <div class="bg-color-7">
     <div class="mx-auto md:max-w-3/4 lg:max-w-1/2">
       <div class="flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-4">
           <div class="flex-initial text-center">
-            <h2 class="text-2xl font-extrabold text-purple-600">
+            <h2 class="text-2xl font-extrabold text-color-5">
               <span v-html="randomEmoji()"></span>&ensp; 在线中
             </h2>
-            <p class="mt-2 text-sm text-gray-600">Welcome</p>
+            <p class="mt-2 text-sm text-color-2">Welcome</p>
           </div>
 
           <div class="pt-12">
