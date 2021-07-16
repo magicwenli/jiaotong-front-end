@@ -2,20 +2,23 @@ module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+      'color-1': '#0f0b26',   // 正文字体
+      'color-2': '#522421',   // 弱一点的正文
+      'color-3': '#8c5a2e',   // JiaoTong
+      'color-4': '#FEFFDE',   // a 标签
+      'color-5': '#D62AD0',   // # 符号
+      'color-6': '#7C83FD',   // 前景
+      'color-7': '#7DEDFF',   // 背景
+      'color-8': '#DDFFBC',   // 按键背景
+      'color-9': '#04009A',   // 按键字体
+      'color-10': '#FF94CC',   // label背景
+      'color-11': '#EFF6FF',   // label字体
+      'color-12': '#96BAFF',   // Banner Footer background
+    },
     extend: {
       boxShadow: ['active'],
-      colors: {
-        'color-1': '#0f0b26',   // 正文字体
-        'color-2': '#522421',   // 弱一点的正文
-        'color-3': '#8c5a2e',   // 预留
-        'color-4': '#0f0b26',   // a 标签
-        'color-5': '#7C83FD',   // # 符号
-        'color-6': '#7C83FD',   // 前景
-        'color-7': '#7DEDFF',   // 背景
-        'color-8': '#96BAFF',   // 按键背景
-        'color-9': '#522421',   // 按键字体
-
-      },
+      
     },
     maxWidth: {
       '0': '0',

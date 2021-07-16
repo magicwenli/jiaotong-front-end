@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-16 09:30:01
+ * @LastEditTime : 2021-07-16 10:09:30
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -10,7 +10,7 @@
   <li>
     <el-card
       :body-style="{ padding: '0px' }"
-      class="bg-color-7 shadow-md p-4 m-2"
+      class="shadow-md p-4 m-2"
       v-loading="loading"
     >
       <div class="flex flex-row relative">
@@ -58,14 +58,13 @@
           :to="label.url"
           class="
             px-2
-            border-green-900
-            bg-color-6
+            bg-color-10
             rounded-tr-md
-            ring-2 ring-offset-2 ring-color-6
+            ring-2 ring-offset-2 ring-color-10
             text-sm
           "
         >
-          <span class="text-color-5 text-base font-bold">#</span
+          <span class="text-color-11 text-base font-bold">#</span
           >{{ label.name }}
         </router-link>
       </div>
@@ -76,7 +75,7 @@
             items-center
             justify-center
             rounded-3xl
-            bg-color-6
+            bg-color-8
             cursor-pointer
             shadow-sm
           "
@@ -88,7 +87,7 @@
             :checked="likeBtnChecked"
             class="flex -mr-4"
           />
-          <span class="mr-4">&ensp;123</span>
+          <span class="mr-4 text-color-9">&ensp;123</span>
         </button>
         <button
           class="
@@ -96,7 +95,7 @@
             items-center
             justify-center
             rounded-3xl
-            bg-color-6
+            bg-color-8
             cursor-pointer
           "
           @click.prevent="changeFavBtn()"
@@ -107,15 +106,15 @@
             :checked="favBtnChecked"
             class="flex -mr-4"
           />
-          <span class="mr-4">&ensp;123</span>
+          <span class="mr-4 text-color-9">&ensp;123</span>
         </button>
 
         <button
-          class="flex-1 rounded-3xl bg-color-6 shadow-sm"
+          class="flex-1 rounded-3xl bg-color-8 shadow-sm"
           @click="showComments = !showComments"
         >
           <i class="fas fa-reply"></i>
-          <span>&ensp;789</span>
+          <span class="text-color-9">&ensp;789</span>
         </button>
       </div>
       <div class="pt-4 overflow-hidden">

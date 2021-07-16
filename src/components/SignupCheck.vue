@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 19:46:02
- * @LastEditTime : 2021-07-16 09:45:57
+ * @LastEditTime : 2021-07-16 09:59:12
  * @Description  : 
  * @FilePath     : /front-end/src/components/SignupCheck.vue
 -->
@@ -23,7 +23,7 @@
           没有收到？
         </p>
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-color-6 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 text-sm font-medium rounded-md">
             重新发送
           </button>
         </div>
