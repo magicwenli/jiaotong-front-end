@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-16 09:19:33
+ * @LastEditTime : 2021-07-16 20:34:46
  * @Description  : 
- * @FilePath     : /front-end/src/components/Contents.vue
+ * @FilePath     : \jiaotong-front-end\src\components\Contents.vue
 -->
 
 <template>
@@ -14,7 +14,7 @@
         v-infinite-scroll="load"
         infinite-scroll-disabled="disabled"
       >
-        <SinglePost v-for="post in posts" :key="post.pid" v-bind="post" />
+        <SinglePost v-for="(post,i) in posts" :key="i" v-bind="post" />
       </ul>
       <p v-if="loading">加载中...</p>
       <p v-if="noMore">没有更多了</p>
@@ -47,20 +47,21 @@ export default {
   },
   async mounted() {
     try {
-      const data = await getPostsByTag('timeline', 1, 10);
-      this.posts = data[0].posts;
+      const data = await getPostsByTag(1, 10, null, "time");
+      this.posts = data;
+      console.log(this.posts);
     } catch (e) {
-      this.$message.error('获取帖子列表失败：' + e);
+      this.$message.error("获取帖子列表失败：" + e);
     }
   },
   methods: {
     async load() {
       this.loading = true;
       try {
-        const data = await getPostsByTag('timeline', 1, 10);
+        const data = await getPostsByTag("timeline", 1, 10);
         this.posts = this.posts.concat(data[0].posts);
       } catch (e) {
-        this.$message.error('获取帖子列表失败：' + e);
+        this.$message.error("获取帖子列表失败：" + e);
       }
       this.loading = false;
     },

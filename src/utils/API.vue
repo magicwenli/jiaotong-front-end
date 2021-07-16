@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-07 16:01:04
- * @LastEditTime : 2021-07-15 10:48:33
+ * @LastEditTime : 2021-07-16 19:14:38
  * @Description  : 
- * @FilePath     : /front-end/src/utils/API.vue
+ * @FilePath     : \jiaotong-front-end\src\utils\API.vue
 -->
 
 <script>
@@ -26,7 +26,7 @@ request.interceptors.response.use(res => {
     // } else {
     //     return Promise.reject(res.data.message);
     // }
-    if (res.data.success == 1) {
+    if (res.data.state == 200) {
         return res.data.data;
     } else {
         return Promise.reject('error');

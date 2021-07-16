@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-16 16:15:49
+ * @LastEditTime : 2021-07-16 20:50:34
  * @Description  : 
- * @FilePath     : /front-end/src/components/SinglePost.vue
+ * @FilePath     : \jiaotong-front-end\src\components\SinglePost.vue
 -->
 
 <template>
@@ -17,7 +17,7 @@
         <!-- 头像 -->
         <el-image
           class="w-12 h-12 rounded-2xl flex-none"
-          :src="emailHash(muid)"
+          :src="emailHash(secretId)"
           :alt="123"
           lazy
         />
@@ -28,16 +28,16 @@
             >
           </div>
           <div>
-            <span class="font-light">{{ formatTimeData(createTime) }}</span>
+            <span class="font-light">{{ formatTimeData(postCreateTime) }}</span>
           </div>
         </div>
       </div>
       <div class="relative overflow-hidden">
         <!-- 正文 -->
         <el-image
-          v-if="hasImg"
+          v-if="checkImg"
           class="float-right ml-4 mt-2 mr-2 mb-2 rounded-lg w-4/12 shadow-md"
-          :src="img"
+          :src="postImage"
           :preview-src-list="preImgList"
           lazy
         >
@@ -48,14 +48,15 @@
           </template>
         </el-image>
         <p class="text-justify pt-2" style="text-indent: 2em">
-          {{ content }}
+          {{ postContent }}
         </p>
       </div>
       <div class="flex space-x-4 pt-4 justify-items-start rounded-xl">
+        <!-- TODO 应改为api请求接口地址 -->
         <router-link
           v-for="label in labels"
-          :key="label.name"
-          :to="label.url"
+          :key="label.lid"
+          :to="label.labelName"
           class="
             px-2
             bg-color-10
@@ -65,7 +66,7 @@
           "
         >
           <!-- <span class="text-color-11 text-base font-bold">#</span> -->
-          {{ label.name }}
+          {{ label.labelName }}
         </router-link>
       </div>
       <div class="flex pt-4 space-x-2">
@@ -87,7 +88,7 @@
             :checked="likeBtnChecked"
             class="flex -mr-4"
           />
-          <span class="mr-4 text-color-9">&ensp;123</span>
+          <span class="mr-4 text-color-9">{{ postLike }}</span>
         </button>
         <button
           class="
@@ -114,13 +115,13 @@
           class="flex-1 rounded-3xl bg-color-8 shadow-md"
           @click="showComments = !showComments"
         >
-          <i class="fas fa-reply"></i>
-          <span class="text-color-9">&ensp;789</span>
+          <i class="fas fa-reply opacity-50"></i>
+          <span class="text-color-9">&ensp;{{ commentsNum }}</span>
         </button>
       </div>
       <div class="pt-4 overflow-hidden">
         <transition name="comments">
-          <Comments v-if="showComments" :pid="pid" :muid="muid" />
+          <Comments v-if="showComments" :pid="pid" :muid="secretId" />
         </transition>
       </div>
     </el-card>
@@ -140,7 +141,16 @@ export default {
     LikeBtn,
     FavBtn,
   },
-  props: ["pid", "muid", "hasImg", "img", "content", "createTime", "labels"],
+  props: [
+    "pid",
+    "secretId",
+    "postImage",
+    "postContent",
+    "postCreateTime",
+    "postLike",
+    "commentsNum",
+    "labels",
+  ],
   methods: {
     formatTimeData(time) {
       let newDate = formatTime(new Date(time).getTime() / 1000);
@@ -182,6 +192,14 @@ export default {
       // console.log(list);
       return list;
     },
+    checkImg(){
+      if(this.postImage==='null'){
+        return false
+      }
+      else {
+        return true
+      }
+    }
   },
 };
 </script>
