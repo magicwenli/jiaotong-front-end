@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-16 14:53:43
+ * @LastEditTime : 2021-07-16 21:20:19
  * @Description  : 
- * @FilePath     : /front-end/src/views/Post.vue
+ * @FilePath     : \jiaotong-front-end\src\views\Post.vue
 -->
 
 <template>
@@ -11,17 +11,23 @@
     <div class="flex flex-col mx-4 mt-4">
       <el-form>
         <div class="flex flex-row mt-4">
-          <router-link class="text-color-1 text-lg my-auto" to="/"
-            ><i class="el-icon-arrow-left"></i>返回</router-link
+          <button
+            class="text-color-9 text-lg p-1 rounded-md my-auto"
+            @click="goBack"
           >
+            <i class="el-icon-arrow-left"></i>返回
+          </button>
           <div class="flex-grow my-auto">
             <h2 class="text-center text-xl font-extrabold text-color-1">
               发布动态
             </h2>
           </div>
-          <router-link class="text-color-1 text-lg my-auto" to="/"
-            ><i class="el-icon-check"></i>发布</router-link
+          <button
+            class="text-color-9 text-lg p-1 rounded-md my-auto"
+            @click="publishPost"
           >
+            <i class="el-icon-check"></i>发布
+          </button>
         </div>
         <div class="mt-4">
           <el-input
@@ -69,6 +75,7 @@
 
 <script>
 import { showdown } from "vue-showdown";
+import { createPost } from "../utils/api/posts";
 import showdownHighlight from "showdown-highlight";
 
 showdown.setFlavor("github"); //original
@@ -109,8 +116,6 @@ function compress(file) {
   });
 }
 
-
-
 export default {
   data() {
     return {
@@ -124,6 +129,25 @@ export default {
   methods: {
     md2Html(text) {
       return Converter.makeHtml(text);
+    },
+    goBack() {
+      this.$router.go(-1); //返回上一层
+    },
+    publishPost() {
+      var postImage = () => {
+        if (true) {
+          return filepath;
+        } else {
+          return "null";
+        }
+      };
+
+      var body = {
+        postContent: this.md2Html(this.textarea2),
+        postCreateTime: new Date(),
+        postImage: postImage,
+      };
+      createPost(body);
     },
     handleRemove(file, fileList) {
       this.fileList = fileList;
