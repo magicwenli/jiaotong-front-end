@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-16 09:22:05
+ * @LastEditTime : 2021-07-16 10:20:40
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
@@ -58,7 +58,7 @@
         </div>
         <div class="flex flex-col my-4">
           <div class="mr-auto">Preview:</div>
-          <div class="rounded-md bg-color-7 block text-left">
+          <div class="rounded-md block text-left">
             <div v-html="md2Html(textarea2)"></div>
           </div>
         </div>
@@ -90,7 +90,7 @@ function compress(file) {
   });
 }
 
-showdown.setFlavor("original");
+showdown.setFlavor("github"); //original
 showdown.setOption("emoji",true);
 showdown.setOption("simplifiedAutoLink",true);
 showdown.setOption("simpleLineBreaks",true)
