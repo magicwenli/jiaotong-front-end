@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-16 20:50:34
+ * @LastEditTime : 2021-07-16 21:45:24
  * @Description  : 
  * @FilePath     : \jiaotong-front-end\src\components\SinglePost.vue
 -->
@@ -56,7 +56,7 @@
         <router-link
           v-for="label in labels"
           :key="label.lid"
-          :to="label.labelName"
+          to="/"
           class="
             px-2
             bg-color-10
@@ -188,7 +188,7 @@ export default {
   computed: {
     preImgList() {
       var list = [];
-      list.push(this.img);
+      list.push(this.postImage);
       // console.log(list);
       return list;
     },
