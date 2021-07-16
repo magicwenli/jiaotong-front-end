@@ -42,4 +42,8 @@
       hr{
         @apply border-t-2 pt-2
       }
+
+      code{
+        @apply overflow-auto
+      }
   }

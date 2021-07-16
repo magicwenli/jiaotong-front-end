@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-16 10:20:40
+ * @LastEditTime : 2021-07-16 11:30:10
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
@@ -51,7 +51,7 @@
             <el-button class="" size="small" type="primary">上传图片</el-button>
             <template #tip>
               <div class="el-upload__tip">
-                只能上传最多一张 jpg/png/png 图片，图片会被压缩
+                只能上传最多一张 jpg/png 图片，图片会被压缩
               </div>
             </template>
           </el-upload>
@@ -69,6 +69,7 @@
 
 <script>
 import { showdown } from "vue-showdown";
+import showdownHighlight from "showdown-highlight";
 
 function compress(file) {
   return new Promise((resolve, reject) => {
@@ -91,15 +92,24 @@ function compress(file) {
 }
 
 showdown.setFlavor("github"); //original
-showdown.setOption("emoji",true);
-showdown.setOption("simplifiedAutoLink",true);
-showdown.setOption("simpleLineBreaks",true)
-var Converter = new showdown.Converter();
+showdown.setOption("emoji", true);
+showdown.setOption("simplifiedAutoLink", true);
+showdown.setOption("simpleLineBreaks", true);
+var Converter = new showdown.Converter({
+  // That's it
+  extensions: [
+    showdownHighlight({
+      // Whether to add the classes to the <pre> tag
+      pre: true,
+    }),
+  ],
+});
 
 export default {
   data() {
     return {
-      textarea2: "",
+      textarea2: "```dustsdfa\nprint(fff)\n1232144\nfs\n```",
+      // textarea2: "",
       fileList: [],
       compressing: false,
       compressedFile: null,
