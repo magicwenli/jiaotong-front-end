@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:09:40
- * @LastEditTime : 2021-07-17 15:08:15
+ * @LastEditTime : 2021-07-17 16:24:02
  * @Description  :  
  * @FilePath     : /front-end/src/components/Banner.vue
 -->
@@ -11,14 +11,14 @@
       <nav @click.prevent class="flex flex-row flex-nowrap overflow-auto">
         <div
           v-for="label in labels"
-          :key="label.id"
+          :key="label.lid"
           class="flex-none text-color-1 px-4 p-4 h-full"
         >
           <router-link
-            :to="'/t/'+label.name"
+            :to="'/t/'+label.labelName"
             class="tracking-wider"
           >
-            {{ label.name }}
+            {{ label.labelName }}
           </router-link>
         </div>
       </nav>
@@ -47,6 +47,7 @@ export default {
   async mounted(){
     try {
       this.labels = await getLabels()
+      // console.log(this.labels);
     } catch (e) {
       this.$message.error('获取标签列表失败：' + e)
     }

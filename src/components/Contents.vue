@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-17 14:56:58
+ * @LastEditTime : 2021-07-17 16:25:37
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
@@ -47,15 +47,15 @@ export default {
       return this.loading || this.noMore;
     },
     currentTag() {
-      console.log(this.tag || "null");
+      // console.log(this.tag || "null");
       return this.tag || "null";
     },
   },
   async mounted() {
     try {
+      // console.log(this.currentTag);
       const data = await getPostsByTag(1, 10, this.currentTag, "time");
       this.posts = data;
-      // console.log(this.posts);
     } catch (e) {
       this.$message.error("获取帖子列表失败：" + e);
     }

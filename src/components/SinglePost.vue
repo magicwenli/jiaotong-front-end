@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-17 14:39:56
+ * @LastEditTime : 2021-07-17 16:26:32
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -56,7 +56,7 @@
         <router-link
           v-for="label in labels"
           :key="label.lid"
-          :to="'/t/'+label.labelName"
+          :to="'/t/' + label.labelName"
           class="
             px-2
             bg-color-10
@@ -165,13 +165,13 @@ export default {
       );
     },
     changeLikeBtn() {
-      if(this.likeBtnChecked){
+      if (this.likeBtnChecked) {
         this.likes--;
-      }else{
+      } else {
         this.likes++;
       }
-      var a = this.$store.commit("setLike",this.pid)
-      console.log(a);
+      
+
       this.likeBtnChecked = !this.likeBtnChecked;
     },
     changeFavBtn() {
@@ -182,7 +182,6 @@ export default {
       // var post = this.$store.state.postLikes
       // console.log(post);
       // // console.log(post.liked);
-
     },
   },
   data() {
@@ -204,14 +203,19 @@ export default {
       // console.log(list);
       return list;
     },
-    checkImg(){
-      if(this.postImage==='null'){
-        return false
+    checkImg() {
+      if (
+        this.postImage === "null" ||
+        this.postImage === "" ||
+        (!this.postImage &&
+          typeof this.postImage != "undefined" &&
+          this.postImage != 0)
+      ) {
+        return false;
+      } else {
+        return true;
       }
-      else {
-        return true
-      }
-    }
+    },
   },
 };
 </script>

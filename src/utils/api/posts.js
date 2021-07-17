@@ -5,12 +5,23 @@ export function getPostsByTag(page, page_size, tags, orderby) {
   page_size = page_size || 10;
   orderby = orderby || 'time';
 
-  return request({
-    url: '/post/show_posts',
-    method: 'get',
-    params: { page, page_size, tags, orderby }
-  })
+  if (tags === "null") {
+    return request({
+      url: '/post/show_posts',
+      method: 'get',
+      params: { page, page_size, orderby }
+    })
+  } else {
+    return request({
+      url: '/post/show_posts',
+      method: 'get',
+      params: { page, page_size, tags, orderby }
+    })
+  }
 }
+
+
+
 
 export function getFavPosts(page, page_size, tags, orderby) {
   page = page || 1;
