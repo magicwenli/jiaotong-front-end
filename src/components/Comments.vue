@@ -95,8 +95,8 @@ export default {
     async loadComments() {
       try {
         const data = await getCommentsOfPost(this.pid, 1, 10);
-        console.log('xxx')
-        console.log(data)
+        // console.log('xxx')
+        // console.log(data)
         this.comments = data.slice(0, 5);
         this.comments.push({
           content: "Hello world!",
