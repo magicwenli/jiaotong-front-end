@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from "./utils/Route";
 import { createStore } from 'vuex'
 import './css/index.css'
+import store from "./store";
 
 import {
     ElButton,
@@ -79,19 +80,7 @@ const plugins = [
     ElNotification,
 ]
 
-// 创建一个新的 store 实例
-const store = createStore({
-    state() {
-        return {
-            count: 0
-        }
-    },
-    mutations: {
-        increment(state) {
-            state.count++
-        }
-    }
-})
+
 
 
 const app = createApp(App)
