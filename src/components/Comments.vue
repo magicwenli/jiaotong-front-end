@@ -9,9 +9,9 @@
       <div v-for="(comment, k) in comments" :key="k">
         <div class="title">
           <div class="user">
-            <el-image class="avatar" :src="emailHash(comment.secretId)" lazy />
+            <el-image class="avatar" :src="emailHash(comment.secretUid)" lazy />
             <div>
-              <div>{{ comment.secretId == muid ? "洞主" : comment.secretId }}</div>
+              <div>{{ comment.secretUid == muid ? "洞主" : comment.secretUid }}</div>
               <div>{{ formatTime(comment.postedTime) }}</div>
             </div>
           </div>
@@ -98,13 +98,13 @@ export default {
         // console.log('xxx')
         // console.log(data)
         this.comments = data.slice(0, 5);
-        this.comments.push({
-          content: "Hello world!",
-          postedTime: "2021-01-01 00:00:00",
-          floorId: -1,
-          info: [{ likes: 100, dislikes: 100 }],
-          secretId: this.muid,
-        });
+        // this.comments.push({
+        //   content: "Hello world!",
+        //   postedTime: "2021-01-01 00:00:00",
+        //   floorId: -1,
+        //   info: [{ likes: 100, dislikes: 100 }],
+        //   secretUid: this.muid,
+        // });
         this.total = data.length;
       } catch (e) {
         this.$message.error("获取评论列表失败：" + e);
