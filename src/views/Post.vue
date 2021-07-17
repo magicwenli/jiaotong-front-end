@@ -9,7 +9,7 @@
 <template>
   <div class="mx-auto md:max-w-3/4 lg:max-w-1/2">
     <div class="flex flex-col mx-4 mt-4">
-      <el-form>
+      <div v-loading="loading">
         <div class="flex flex-row mt-4">
           <button
             class="text-color-9 text-lg p-1 rounded-md my-auto"
@@ -41,8 +41,8 @@
 
         <div class="mt-4">
           <el-upload
-            class=""
-            :action="imgUploadUrl"
+            ref="upload"
+            action=""
             :auto-upload="false"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
@@ -68,7 +68,7 @@
             <div v-html="md2Html(textarea2)"></div>
           </div>
         </div>
-      </el-form>
+      </div>
     </div>
   </div>
 </template>
@@ -124,6 +124,7 @@ export default {
       fileList: [],
       compressing: false,
       compressedFile: null,
+      loading: false,
     };
   },
   methods: {
@@ -133,28 +134,29 @@ export default {
     goBack() {
       this.$router.go(-1); //返回上一层
     },
-    publishPost() {
-      var postImage = () => {
-        if (true) {
-          return filepath;
-        } else {
-          return "null";
-        }
-      };
-
-      var body = {
-        postContent: this.md2Html(this.textarea2),
-        postCreateTime: new Date(),
-        postImage: postImage,
-      };
-      createPost(body);
+    async publishPost() {
+      if (!this.textarea2.length) {
+        this.$message.error('发布内容不能为空');
+        return;
+      }
+      this.loading = true;
+      try {
+        await createPost(this.md2Html(this.textarea2), '', this.compressedFile);
+      } catch (e) {
+        this.$message.error('发布失败：' + e);
+        this.loading = false;
+        return;
+      }
+      this.loading = false;
+      this.textarea2 = '';
+      this.$message.success('发布动态成功');
     },
     handleRemove(file, fileList) {
       this.fileList = fileList;
       this.compressedFile = null;
     },
     handlePreview(file) {
-      console.log(file);
+      // console.log(file);
     },
     async handleChange(file, fileList) {
       this.fileList = fileList;
@@ -162,7 +164,9 @@ export default {
       try {
         this.compressedFile = await compress(file.raw);
       } catch (e) {
-        this.$message.error(String(e));
+        this.$refs.upload.clearFiles();
+        this.fileList = [];
+        this.$message.error('图片压缩失败：' + e);
       }
       this.compressing = false;
     },

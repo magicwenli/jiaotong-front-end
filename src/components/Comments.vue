@@ -1,9 +1,8 @@
 <template>
-  <el-card :body-style="{ padding: '0.5rem' }">
+  <el-card :body-style="{ padding: '0.5rem' }" v-loading="loading">
     <template #header>
       <div class="header">
         <b>{{ total }}条评论</b>
-        <el-button class="button" type="text">按钮</el-button>
       </div>
     </template>
     <div v-if="comments.length">
@@ -42,7 +41,7 @@
             size="medium"
             :placeholder="'回复' + comment.floorId + '楼'"
             v-model="replyText" />
-          <el-button class="submit-button" size="medium" type="primary">回复</el-button>
+          <el-button class="submit-button" size="medium" type="primary" @click="publishReply(comment.floorId)">回复</el-button>
         </div>
         <el-divider />
       </div>
@@ -65,13 +64,13 @@
         size="medium"
         placeholder="发布评论"
         v-model="commentText" />
-      <el-button class="submit-button" size="medium" type="primary">发布</el-button>
+      <el-button class="submit-button" size="medium" type="primary" @click="publishComment">发布</el-button>
     </div>
   </el-card>
 </template>
 
 <script>
-import { getCommentsOfPost } from "../utils/api/comments.js";
+import { getCommentsOfPost, createComment } from "../utils/api/comments.js";
 import formatTime from "../utils/TimeFormater.vue";
 import md5 from "js-md5";
 
@@ -93,6 +92,7 @@ export default {
   },
   methods: {
     async loadComments() {
+      this.loading = true;
       try {
         const data = await getCommentsOfPost(this.pid, 1, 10);
         // console.log('xxx')
@@ -109,6 +109,7 @@ export default {
       } catch (e) {
         this.$message.error("获取评论列表失败：" + e);
       }
+      this.loading = false;
     },
     async turn(page) {
       this.page = page;
@@ -132,6 +133,42 @@ export default {
       } else {
         this.replyFloor = floor;
       }
+    },
+    async publishComment() {
+      if (!this.commentText.length) {
+        this.$message.error('评论不能为空');
+        return;
+      }
+      this.loading = true;
+      try {
+        await createComment(this.pid, this.commentText);
+      } catch (e) {
+        this.$message.error('发送评论失败：' + e);
+        this.loading = false;
+        return;
+      }
+      this.loading = false;
+      this.commentText = '';
+      this.$message.success('发送评论成功');
+      await this.loadComments();
+    },
+    async publishReply(floor) {
+      if (!this.replyText.length) {
+        this.$message.error('评论不能为空');
+        return;
+      }
+      this.loading = true;
+      try {
+        await createComment(this.pid, '回复' + floor + '楼：' + this.replyText);
+      } catch (e) {
+        this.$message.error('发送评论失败：' + e);
+        this.loading = false;
+        return;
+      }
+      this.loading = false;
+      this.reply(0);
+      this.$message.success('发送评论成功');
+      await this.loadComments();
     },
   },
   async mounted() {
