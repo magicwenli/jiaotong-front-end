@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-16 21:50:20
+ * @LastEditTime : 2021-07-17 14:56:58
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\components\Contents.vue
+ * @FilePath     : /front-end/src/components/Contents.vue
 -->
 
 <template>
@@ -27,6 +27,7 @@ import SinglePost from "./SinglePost.vue";
 import { getPostsByTag } from "../utils/api/posts.js";
 
 export default {
+  props: ["tag"],
   components: {
     SinglePost,
   },
@@ -45,21 +46,33 @@ export default {
     disabled() {
       return this.loading || this.noMore;
     },
+    currentTag() {
+      console.log(this.tag || "null");
+      return this.tag || "null";
+    },
   },
   async mounted() {
     try {
-      const data = await getPostsByTag(1, 10, null, "time");
+      const data = await getPostsByTag(1, 10, this.currentTag, "time");
       this.posts = data;
       // console.log(this.posts);
     } catch (e) {
       this.$message.error("获取帖子列表失败：" + e);
     }
   },
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      (toParams, previousParams) => {
+        window.location.reload()
+      }
+    );
+  },
   methods: {
     async load() {
       this.loading = true;
       try {
-        const data = await getPostsByTag(1, 10, null, "time");
+        const data = await getPostsByTag(1, 10, this.currentTag, "time");
         this.posts = this.posts.concat(data);
       } catch (e) {
         this.$message.error("获取帖子列表失败：" + e);

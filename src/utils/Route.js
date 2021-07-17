@@ -19,29 +19,30 @@ const routes = [
         meta: { isLogin: true }
     },
     {
-        path: '/post', 
+        path: '/post',
         component: Post,
         meta: { isLogin: true }
     },
     {
-        path: '/userinfo', 
+        path: '/userinfo',
         component: UserInfo,
         meta: { isLogin: true }
     },
     {
-        path: '/signup', 
+        path: '/signup',
         component: SignUp,
         meta: { isLogin: false }
     },
     {
-        path: '/login', 
+        path: '/login',
         component: Login,
         meta: { isLogin: false }
     },
     {
-        path: '/latest', 
+        path: '/t/:tag',
         component: ShuDong,
-        meta: { isLogin: false }
+        props: true,
+        meta: { isLogin: true }
     },
 ]
 

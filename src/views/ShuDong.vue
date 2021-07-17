@@ -1,7 +1,7 @@
 <template>
   <div>
     <Banner />
-    <Contents />
+    <Contents :tag="tag"/>
   </div>
 </template>
 
@@ -10,6 +10,7 @@ import Banner from "../components/Banner.vue";
 import Contents from "../components/Contents.vue";
 
 export default {
+  props:["tag"],
   components: { Banner, Contents },
 }
 </script>

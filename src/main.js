@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from "./utils/Route";
 import { createStore } from 'vuex'
 import './css/index.css'
+import store from "./store";
 
 import {
     ElButton,
@@ -79,19 +80,7 @@ const plugins = [
     ElNotification,
 ]
 
-// 创建一个新的 store 实例
-const store = createStore({
-    state() {
-        return {
-            count: 0
-        }
-    },
-    mutations: {
-        increment(state) {
-            state.count++
-        }
-    }
-})
+
 
 
 const app = createApp(App)
@@ -116,7 +105,7 @@ router.beforeEach((to, from, next) => {
     if (getFlag === "isLogin") {
         //设置vuex登录状态为已登录
         store.state.isLogin = true
-        next()
+
         //如果已登录，还想想进入登录注册界面，则定向回首页
         if (!to.meta.isLogin) {
             //iViewUi友好提示
@@ -124,6 +113,8 @@ router.beforeEach((to, from, next) => {
             next({
                 path: '/'
             })
+        } else {
+            next()
         }
         //如果登录标志不存在，即未登录
     } else {
@@ -137,7 +128,7 @@ router.beforeEach((to, from, next) => {
                 showClose: true,
                 message: "请先登录",
                 type: "error",
-              })
+            })
             //用户进入无需登录的界面，则跳转继续
         } else {
             next()

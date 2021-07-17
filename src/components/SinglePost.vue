@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-16 21:45:24
+ * @LastEditTime : 2021-07-17 14:39:56
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\components\SinglePost.vue
+ * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
 
 <template>
@@ -56,7 +56,7 @@
         <router-link
           v-for="label in labels"
           :key="label.lid"
-          to="/"
+          :to="'/t/'+label.labelName"
           class="
             px-2
             bg-color-10
@@ -88,7 +88,7 @@
             :checked="likeBtnChecked"
             class="flex -mr-4"
           />
-          <span class="mr-4 text-color-9">{{ postLike }}</span>
+          <span class="mr-4 text-color-9">{{ likes }}</span>
         </button>
         <button
           class="
@@ -108,7 +108,7 @@
             :checked="favBtnChecked"
             class="flex -mr-4"
           />
-          <span class="mr-4 text-color-9">&ensp;123</span>
+          <!-- <span class="mr-4 text-color-9">&ensp;123</span> -->
         </button>
 
         <button
@@ -165,6 +165,13 @@ export default {
       );
     },
     changeLikeBtn() {
+      if(this.likeBtnChecked){
+        this.likes--;
+      }else{
+        this.likes++;
+      }
+      var a = this.$store.commit("setLike",this.pid)
+      console.log(a);
       this.likeBtnChecked = !this.likeBtnChecked;
     },
     changeFavBtn() {
@@ -172,6 +179,10 @@ export default {
     },
     init() {
       this.loading = false;
+      // var post = this.$store.state.postLikes
+      // console.log(post);
+      // // console.log(post.liked);
+
     },
   },
   data() {
@@ -180,6 +191,7 @@ export default {
       showComments: false,
       likeBtnChecked: false,
       favBtnChecked: false,
+      likes: this.postLike,
     };
   },
   mounted() {
