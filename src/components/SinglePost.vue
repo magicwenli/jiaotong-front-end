@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-17 16:26:32
+ * @LastEditTime : 2021-07-17 16:50:52
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -134,6 +134,7 @@ import formatTime from "../utils/TimeFormater.vue";
 import md5 from "js-md5";
 import LikeBtn from "./LikeBtn.vue";
 import FavBtn from "./FavBtn.vue";
+import { createFav, deleteFav, likePost } from "../utils/api/posts";
 
 export default {
   components: {
@@ -165,17 +166,32 @@ export default {
       );
     },
     changeLikeBtn() {
-      if (this.likeBtnChecked) {
+      this.likeBtnChecked = !this.likeBtnChecked;
+      if (!this.likeBtnChecked) {
         this.likes--;
       } else {
         this.likes++;
+        try {
+          likePost(this.pid);
+        } catch (e) {
+          this.$message.warning(e);
+        }
       }
-      
-
-      this.likeBtnChecked = !this.likeBtnChecked;
     },
     changeFavBtn() {
       this.favBtnChecked = !this.favBtnChecked;
+
+      if (!this.favBtnChecked) {
+        deleteFav(this.pid).catch((e) => {
+          console.log(e);
+          this.$message.warning(e);
+        });
+      } else {
+        createFav(this.pid).catch((e) => {
+          console.log(e);
+          this.$message.warning(e);
+        });
+      }
     },
     init() {
       this.loading = false;

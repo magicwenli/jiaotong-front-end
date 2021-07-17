@@ -1,13 +1,13 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-13 09:57:26
- * @LastEditTime : 2021-07-15 17:03:31
+ * @LastEditTime : 2021-07-17 17:06:18
  * @Description  : 
  * @FilePath     : /front-end/src/views/UserInfo.vue
 -->
 
 <template>
-  <div class="bg-color-7">
+  <div class="bg-color-7" style="height: 80vh;">
     <div class="mx-auto md:max-w-3/4 lg:max-w-1/2">
       <div class="flex items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-4">
@@ -64,7 +64,7 @@ export default {
     },
     toFavorite(){
       console.log("to favorite");
-      this.$router.push({ path: '/', query: { tag: 'userFavorites' } })
+      this.$router.push('/t/userFavorites')
     }
   },
 };

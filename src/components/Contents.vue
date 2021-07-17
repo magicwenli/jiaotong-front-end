@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-17 16:25:37
+ * @LastEditTime : 2021-07-17 17:03:32
  * @Description  : 
  * @FilePath     : /front-end/src/components/Contents.vue
 -->
@@ -24,7 +24,7 @@
 
 <script>
 import SinglePost from "./SinglePost.vue";
-import { getPostsByTag } from "../utils/api/posts.js";
+import { getPostsByTag, getFavPosts } from "../utils/api/posts.js";
 
 export default {
   props: ["tag"],
@@ -33,15 +33,13 @@ export default {
   },
   data() {
     return {
-      posts: null,
-      count: 10,
+      posts: [],
+      page: 1,
       loading: false,
+      noMore: false,
     };
   },
   computed: {
-    noMore() {
-      return this.count >= 20;
-    },
     // TODO 按照api返回是否还有内容
     disabled() {
       return this.loading || this.noMore;
@@ -52,30 +50,67 @@ export default {
     },
   },
   async mounted() {
-    try {
-      // console.log(this.currentTag);
-      const data = await getPostsByTag(1, 10, this.currentTag, "time");
-      this.posts = data;
-    } catch (e) {
-      this.$message.error("获取帖子列表失败：" + e);
+    if (this.currentTag === "userFavorites") {
+      try {
+        const data = await getFavPosts(this.page, 10, "time");
+        this.posts = data;
+      } catch (e) {
+        this.$message.error("获取收藏列表失败：" + e);
+      }
+    } else {
+      try {
+        // console.log(this.currentTag);
+        const data = await getPostsByTag(
+          this.page,
+          10,
+          this.currentTag,
+          "time"
+        );
+        this.posts = data;
+      } catch (e) {
+        this.$message.error("获取帖子列表失败：" + e);
+      }
     }
   },
   created() {
     this.$watch(
       () => this.$route.params,
       (toParams, previousParams) => {
-        window.location.reload()
+        window.location.reload();
       }
     );
   },
   methods: {
     async load() {
       this.loading = true;
-      try {
-        const data = await getPostsByTag(1, 10, this.currentTag, "time");
-        this.posts = this.posts.concat(data);
-      } catch (e) {
-        this.$message.error("获取帖子列表失败：" + e);
+      this.page++;
+      if (this.currentTag === "userFavorites") {
+        try {
+          const data = await getFavPosts(this.page, 10, "time");
+          if (data.length === 0) {
+            this.noMore = true;
+          } else {
+            this.posts = this.posts.concat(data);
+          }
+        } catch (e) {
+          this.$message.error("获取收藏列表失败：" + e);
+        }
+      } else {
+        try {
+          const data = await getPostsByTag(
+            this.page,
+            10,
+            this.currentTag,
+            "time"
+          );
+          if (data.length === 0) {
+            this.noMore = true;
+          } else {
+            this.posts = this.posts.concat(data);
+          }
+        } catch (e) {
+          this.$message.error("获取帖子列表失败：" + e);
+        }
       }
       this.loading = false;
     },

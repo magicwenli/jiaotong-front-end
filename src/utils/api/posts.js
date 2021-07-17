@@ -23,7 +23,7 @@ export function getPostsByTag(page, page_size, tags, orderby) {
 
 
 
-export function getFavPosts(page, page_size, tags, orderby) {
+export function getFavPosts(page, page_size, orderby) {
   page = page || 1;
   page_size = page_size || 10;
   orderby = orderby || 'time';
@@ -31,7 +31,7 @@ export function getFavPosts(page, page_size, tags, orderby) {
   return request({
     url: '/post/show_favorites',
     method: 'get',
-    params: { page, page_size, tags, orderby }
+    params: { page, page_size, orderby }
   })
 }
 
