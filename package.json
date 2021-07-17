@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "element-plus": "^1.0.2-beta.55",
     "js-md5": "^0.7.3",
+    "qs": "^6.10.1",
     "showdown": "^1.9.1",
     "showdown-highlight": "^2.1.8",
     "vue": "^3.0.5",

@@ -8,56 +8,36 @@
 
 <script>
 import axios from 'axios';
+import qs from 'qs';
 
-const request = axios.create({
+const _request = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
-    headers: {
-        'Content-Type': 'application/json',
-        // 'Authorization': "JWT " + localStorage.getItem('token')
-    },
     xsrfCookieName: 'csrftoken',
     xsrfHeaderName: 'X-CSRFToken',
     withCredentials: true
 });
 
-request.interceptors.response.use(res => {
-    // if (res.data.state == 200) {
-    //     return res.data.data;
-    // } else {
-    //     return Promise.reject(res.data.message);
-    // }
+_request.interceptors.response.use(res => {
     if (res.data.state == 200) {
         return res.data.data;
     } else {
-        return Promise.reject('error');
+        return Promise.reject(res.data.message);
     }
-}, err => Promise.reject(err.message));
+}, () => Promise.reject('网络错误'));
 
-
-const requestForm = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
-    headers: {
-        'Content-Type': 'multipart/form-data',
-        // 'Authorization': "JWT " + localStorage.getItem('token')
-    },
-    xsrfCookieName: 'csrftoken',
-    xsrfHeaderName: 'X-CSRFToken',
-    withCredentials: true
-});
-
-requestForm.interceptors.response.use(res => {
-    // if (res.data.state == 200) {
-    //     return res.data.data;
-    // } else {
-    //     return Promise.reject(res.data.message);
-    // }
-    if (res.data.state == 200) {
-        return res.data.data;
-    } else {
-        return Promise.reject('error');
+export function request(opt) {
+    if (opt.data != null) {
+        opt.data = qs.stringify(opt.data);
     }
-}, err => Promise.reject(err.message));
+    return _request(opt);
+}
 
-
-export {request,requestForm};
+export function requestForm(opt) {
+    const data = new FormData();
+    for (const k in opt.data) {
+        data.append(k, opt.data[k]);
+    }
+    opt.data = data;
+    return _request(opt);
+}
 </script>
