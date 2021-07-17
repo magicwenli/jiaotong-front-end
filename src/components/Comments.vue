@@ -78,35 +78,24 @@ export default {
   props: {
     pid: Number,
     muid: String,
+    total: Number
   },
   data() {
     return {
       comments: [],
       pageSize: 10,
-      total: 0,
       page: 1,
       commentText: "",
       replyFloor: 0,
       replyText: "",
-      loading:false,
+      loading: false,
     };
   },
   methods: {
     async loadComments() {
       this.loading = true;
       try {
-        const data = await getCommentsOfPost(this.pid, 1, 10);
-        // console.log('xxx')
-        // console.log(data)
-        this.comments = data.slice(0, 5);
-        // this.comments.push({
-        //   content: "Hello world!",
-        //   postedTime: "2021-01-01 00:00:00",
-        //   floorId: -1,
-        //   info: [{ likes: 100, dislikes: 100 }],
-        //   secretUid: this.muid,
-        // });
-        this.total = data.length;
+        this.comments = await getCommentsOfPost(this.pid, this.page, this.pageSize);
       } catch (e) {
         this.$message.error("获取评论列表失败：" + e);
       }

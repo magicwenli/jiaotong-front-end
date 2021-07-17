@@ -123,7 +123,7 @@
       </div>
       <div class="pt-4 overflow-hidden">
         <transition name="comments">
-          <Comments v-if="showComments" :pid="pid" :muid="secretId" />
+          <Comments v-if="showComments" :pid="pid" :muid="secretId" :total="commentsNum" />
         </transition>
       </div>
     </el-card>
