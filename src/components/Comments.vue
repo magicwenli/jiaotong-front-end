@@ -6,7 +6,7 @@
       </div>
     </template>
     <div v-if="comments.length">
-      <div v-for="(comment, k) in comments" :key="k">
+      <div v-for="comment in comments" :key="comment.secretUid">
         <div class="title">
           <div class="user">
             <el-image class="avatar" :src="emailHash(comment.secretUid)" lazy />
