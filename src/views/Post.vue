@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-17 09:48:29
+ * @LastEditTime : 2021-07-17 17:38:41
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
@@ -38,7 +38,23 @@
           >
           </el-input>
         </div>
-
+        <div class="mt-4">
+          <el-select
+            v-model="labelChoice"
+            multiple
+            placeholder="请选择标签"
+            :multiple-limit="5"
+            class="w-full"
+          >
+            <el-option
+              v-for="item in labels"
+              :key="item.lid"
+              :label="item.labelName"
+              :value="item.lid"
+            >
+            </el-option>
+          </el-select>
+        </div>
         <div class="mt-4">
           <el-upload
             ref="upload"
@@ -75,7 +91,7 @@
 
 <script>
 import { showdown } from "vue-showdown";
-import { createPost } from "../utils/api/posts";
+import { createPost, getLabels } from "../utils/api/posts";
 import showdownHighlight from "showdown-highlight";
 
 showdown.setFlavor("github"); //original
@@ -125,6 +141,8 @@ export default {
       compressing: false,
       compressedFile: null,
       loading: false,
+      labels: [],
+      labelChoice: [],
     };
   },
   methods: {
@@ -136,20 +154,21 @@ export default {
     },
     async publishPost() {
       if (!this.textarea2.length) {
-        this.$message.error('发布内容不能为空');
+        this.$message.error("发布内容不能为空");
         return;
       }
       this.loading = true;
       try {
-        await createPost(this.md2Html(this.textarea2), '', this.compressedFile);
+        await createPost(this.md2Html(this.textarea2), this.labelChoice.join(','), this.compressedFile);
       } catch (e) {
-        this.$message.error('发布失败：' + e);
+        this.$message.error("发布失败：" + e);
         this.loading = false;
         return;
       }
       this.loading = false;
-      this.textarea2 = '';
-      this.$message.success('发布动态成功');
+      this.textarea2 = "";
+      this.$message.success("发布动态成功");
+      this.$router.push('/')
     },
     handleRemove(file, fileList) {
       this.fileList = fileList;
@@ -166,7 +185,7 @@ export default {
       } catch (e) {
         this.$refs.upload.clearFiles();
         this.fileList = [];
-        this.$message.error('图片压缩失败：' + e);
+        this.$message.error("图片压缩失败：" + e);
       }
       this.compressing = false;
     },
@@ -175,8 +194,16 @@ export default {
     },
   },
   computed: {
-    imgUploadUrl(){
+    imgUploadUrl() {
       return import.meta.env.VITE_IMAME_UPLOAD_URL;
+    },
+  },
+  async mounted() {
+    try {
+      this.labels = await getLabels();
+      // console.log(this.labels);
+    } catch (e) {
+      this.$message.error("获取标签列表失败：" + e);
     }
   },
   components: [],

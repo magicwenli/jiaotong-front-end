@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-17 16:50:52
+ * @LastEditTime : 2021-07-17 17:39:24
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -47,9 +47,11 @@
             </div>
           </template>
         </el-image>
-        <p class="text-justify pt-2" style="text-indent: 2em">
-          {{ postContent }}
-        </p>
+        <div
+          class="text-justify pt-2"
+          v-html="postContent"
+          style="text-indent: 2em"
+        ></div>
       </div>
       <div class="flex space-x-4 pt-4 justify-items-start rounded-xl">
         <!-- TODO 应改为api请求接口地址 -->

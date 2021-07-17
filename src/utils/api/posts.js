@@ -49,7 +49,7 @@ export function searchPosts(page, page_size, tags, orderby) {
 
 export function createPost(postContent, labelsString, picture) {
   return requestForm({
-    url: '/post/create_posts',
+    url: '/post/create_post',
     method: 'post',
     data: { postContent, labelsString, picture }
   })
