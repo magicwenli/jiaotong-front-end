@@ -75,8 +75,12 @@ export default {
       console.log(id);
     },
   },
-  computed(){
-    this.labels = getLabels()
+  async mounted(){
+    try {
+      this.labels = await getLabels()
+    } catch (e) {
+      this.$message.error('获取标签列表失败：' + e)
+    }
   }
 };
 </script>
