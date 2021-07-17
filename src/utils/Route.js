@@ -7,6 +7,7 @@ import UserInfo from '../views/UserInfo.vue';
 import Post from '../views/Post.vue';
 import SignUp from '../views/SignUp.vue';
 import Login from '../views/Login.vue';
+import Search from '../views/Search.vue';
 
 
 // 2. 定义一些路由
@@ -42,6 +43,19 @@ const routes = [
         path: '/t/:tag',
         component: ShuDong,
         props: true,
+        meta: { isLogin: true }
+    },
+    {
+        path: '/search',
+        component: Search,
+        props: route => (
+            {
+                key: route.query.key,
+                tags: route.query.tags,
+                orderby: route.query.orderby,
+                page: route.query.page,
+                page_size: route.query.page_size
+            }),
         meta: { isLogin: true }
     },
 ]

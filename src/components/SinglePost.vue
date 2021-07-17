@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-17 17:39:24
+ * @LastEditTime : 2021-07-17 19:28:07
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -18,7 +18,7 @@
         <el-image
           class="w-12 h-12 rounded-2xl flex-none"
           :src="emailHash(secretId)"
-          :alt="123"
+          alt="用户头像"
           lazy
         />
         <div class="flex-row px-4 text-left text-md">
@@ -37,7 +37,7 @@
         <el-image
           v-if="checkImg"
           class="float-right ml-4 mt-2 mr-2 mb-2 rounded-lg w-4/12 shadow-md"
-          :src="postImage"
+          :src="realImgPath"
           :preview-src-list="preImgList"
           lazy
         >
@@ -215,6 +215,9 @@ export default {
     this.init();
   },
   computed: {
+    realImgPath() {
+      return "http://192.168.43.34:8080/post/get_picture?postImage=" + this.postImage;
+    },
     preImgList() {
       var list = [];
       list.push(this.postImage);

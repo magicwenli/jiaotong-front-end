@@ -88,6 +88,7 @@ export default {
       commentText: "",
       replyFloor: 0,
       replyText: "",
+      loading:false,
     };
   },
   methods: {

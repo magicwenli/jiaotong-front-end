@@ -20,9 +20,6 @@ export function getPostsByTag(page, page_size, tags, orderby) {
   }
 }
 
-
-
-
 export function getFavPosts(page, page_size, orderby) {
   page = page || 1;
   page_size = page_size || 10;
@@ -35,16 +32,41 @@ export function getFavPosts(page, page_size, orderby) {
   })
 }
 
-export function searchPosts(page, page_size, tags, orderby) {
+export function searchPosts(key, page, page_size, tags, orderby) {
   page = page || 1;
   page_size = page_size || 10;
   orderby = orderby || 'time';
+  tags = tags || ""
 
-  return request({
-    url: '/post/show_favorites',
-    method: 'get',
-    params: { page, page_size, tags, orderby }
-  })
+  if (key === "") {
+    if (tags === "") {
+      return request({
+        url: '/post/search_post',
+        method: 'get',
+        params: { page, page_size, orderby }
+      })
+    } else {
+      return request({
+        url: '/post/search_post',
+        method: 'get',
+        params: { page, page_size, tags, orderby }
+      })
+    }
+  } else {
+    if (tags === "") {
+      return request({
+        url: '/post/search_post',
+        method: 'get',
+        params: { key, page, page_size, orderby }
+      })
+    } else {
+      return request({
+        url: '/post/search_post',
+        method: 'get',
+        params: { key, page, page_size, tags, orderby }
+      })
+    }
+  }
 }
 
 export function createPost(postContent, labelsString, picture) {
