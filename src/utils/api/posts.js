@@ -1,4 +1,4 @@
-import request from '../API.vue'
+import {request,requestForm} from '../API.vue'
 
 function getPostsByTag(page, page_size, tags, orderby) {
   page = page || 1;
@@ -14,7 +14,8 @@ function getPostsByTag(page, page_size, tags, orderby) {
 
 
 function createPost(body) {
-  return request({
+  //body: FormData
+  return requestForm({
     url: '/create_posts',
     method: 'post',
     data: body

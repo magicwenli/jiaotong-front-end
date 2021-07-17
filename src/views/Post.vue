@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-16 21:20:19
+ * @LastEditTime : 2021-07-17 09:48:29
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\views\Post.vue
+ * @FilePath     : /front-end/src/views/Post.vue
 -->
 
 <template>
@@ -42,7 +42,7 @@
         <div class="mt-4">
           <el-upload
             class=""
-            action=""
+            :action="imgUploadUrl"
             :auto-upload="false"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
@@ -169,6 +169,11 @@ export default {
     handleExceed() {
       this.$message.error("最多只能上传一张图片");
     },
+  },
+  computed: {
+    imgUploadUrl(){
+      return import.meta.env.VITE_IMAME_UPLOAD_URL;
+    }
   },
   components: [],
 };

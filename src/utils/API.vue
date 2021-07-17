@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-07 16:01:04
- * @LastEditTime : 2021-07-16 19:14:38
+ * @LastEditTime : 2021-07-17 09:37:19
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\utils\API.vue
+ * @FilePath     : /front-end/src/utils/API.vue
 -->
 
 <script>
@@ -33,5 +33,31 @@ request.interceptors.response.use(res => {
     }
 }, err => Promise.reject(err.message));
 
-export default request;
+
+const requestForm = axios.create({
+    baseURL: import.meta.env.VITE_API_BASE_URL,
+    headers: {
+        'Content-Type': 'multipart/form-data',
+        // 'Authorization': "JWT " + localStorage.getItem('token')
+    },
+    xsrfCookieName: 'csrftoken',
+    xsrfHeaderName: 'X-CSRFToken',
+    withCredentials: true
+});
+
+requestForm.interceptors.response.use(res => {
+    // if (res.data.state == 200) {
+    //     return res.data.data;
+    // } else {
+    //     return Promise.reject(res.data.message);
+    // }
+    if (res.data.state == 200) {
+        return res.data.data;
+    } else {
+        return Promise.reject('error');
+    }
+}, err => Promise.reject(err.message));
+
+
+export {request,requestForm};
 </script>
