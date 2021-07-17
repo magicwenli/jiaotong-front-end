@@ -1,16 +1,16 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-11 21:49:59
+ * @LastEditTime : 2021-07-17 16:06:17
  * @Description  : 
- * @FilePath     : \jiaotong-front-end\src\views\Signup.vue
+ * @FilePath     : /front-end/src/views/Signup.vue
 -->
 
 
 <template>
   <Base>
     <template v-slot:headline>
-      <a class="fas fa-user-plus" />&ensp; 注册
+      <a class="fas fa-user-plus text-color-1" />&ensp; 注册
     </template>
     <template v-slot:tips> 目前仅接受部分邮箱注册。 </template>
     <template #default>
@@ -32,13 +32,27 @@
           >
           </el-input>
         </el-form-item>
+        <el-form-item>
+          <el-button
+            type="primary"
+            :disabled="signupForm.btnVarCode"
+            @click="sendEmail"
+          >
+            发送验证码
+          </el-button>
+        </el-form-item>
+        <el-form-item prop="verCode" label="验证码">
+          <el-input type="text" v-model="signupForm.verCode" autocomplete="off">
+          </el-input>
+        </el-form-item>
         <el-form-item prop="pass" label="输入密码">
           <el-input
             type="password"
             v-model="signupForm.pass"
             autocomplete="off"
             prefix-icon="el-icon-lock"
-          ></el-input>
+          >
+          </el-input>
         </el-form-item>
         <el-form-item prop="repass" label="再次输入密码">
           <el-input
@@ -46,12 +60,15 @@
             v-model="signupForm.repass"
             autocomplete="off"
             prefix-icon="el-icon-lock"
-          ></el-input>
+          >
+          </el-input>
         </el-form-item>
         <el-form-item>
           <div class="flex items-center justify-between">
             <el-checkbox v-model:checked="signupForm.remember">
-              我已阅读，并同意<a href="#">《用户协议》</a>
+              我已阅读，并同意<a href="#"
+                ><span class="text-color-9">《用户协议》</span></a
+              >
             </el-checkbox>
           </div>
         </el-form-item>
@@ -70,6 +87,7 @@
 
 <script>
 import Base from "./_Base.vue";
+import { register, sendVerCode } from "../utils/api/users.js";
 
 export default {
   components: {
@@ -108,15 +126,18 @@ export default {
         if (emailPass) {
           callback(new Error("暂时不接受该类邮箱注册"));
         } else {
+          this.signupForm.btnVarCode = false;
           callback();
         }
       }
     };
     return {
       signupForm: {
-        pass: "",
-        email: "",
-        repass:"",
+        pass: "12345678",
+        email: "skyeye977@stu.xjtu.edu.cn",
+        repass: "12345678",
+        verCode: "ohvRRvb2Se",
+        btnVarCode: true,
         remember: false,
       },
       rules: {
@@ -129,13 +150,43 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
+        console.log("123");
+
         if (valid) {
-          alert("submit!");
+          register(
+            this.signupForm.email,
+            this.signupForm.pass,
+            this.signupForm.verCode
+          )
+            .then(() => {
+              this.$message.success("注册成功");
+              this.$router.push("/login");
+            })
+            .catch((e) => {
+              console.log(e);
+              this.$message.error("注册失败：" + e);
+            });
         } else {
-          console.log("error submit!!");
+          this.$message.error("注册失败：" + e);
           return false;
         }
       });
+    },
+    sendEmail() {
+      sendVerCode(this.signupForm.email)
+        .then(() => {
+          this.$message.success("发送验证码成功, 60秒后可重新发送");
+        })
+        .catch((e) => {
+          console.log(e);
+          this.$message.error("发送失败：" + e);
+        });
+
+      this.signupForm.btnVarCode = true;
+
+      setTimeout(() => {
+        this.signupForm.btnVarCode = false;
+      }, 60);
     },
   },
 };

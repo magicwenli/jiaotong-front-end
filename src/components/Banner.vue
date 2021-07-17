@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:09:40
- * @LastEditTime : 2021-07-17 14:54:46
+ * @LastEditTime : 2021-07-17 15:08:15
  * @Description  :  
  * @FilePath     : /front-end/src/components/Banner.vue
 -->
@@ -33,38 +33,7 @@ export default {
   data() {
     return {
       active: 1,
-      labels: [
-        {
-          name: "最新",
-          url: "/latest",
-          id: 1,
-        },
-        {
-          name: "二手",
-          url: "/latest",
-          id: 2,
-        },
-        {
-          name: "学习",
-          url: "/latest",
-          id: 3,
-        },
-        {
-          name: "分享",
-          url: "/latest",
-          id: 4,
-        },
-        {
-          name: "失物招领",
-          url: "/latest",
-          id: 5,
-        },
-        {
-          name: "Game",
-          url: "/latest",
-          id: 6,
-        },
-      ],
+      labels: [],
     };
   },
   // Functions we will be using.

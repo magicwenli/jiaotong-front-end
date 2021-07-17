@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-13 14:18:15
+ * @LastEditTime : 2021-07-17 16:09:30
  * @Description  : 
  * @FilePath     : /front-end/src/views/Login.vue
 -->
@@ -44,9 +44,13 @@
               记住我
             </el-checkbox>
             <div class="text-sm font-medium">
-              <router-link to="/"> 忘记密码 </router-link>
+              <router-link to="/">
+                <span class="text-color-9"> 忘记密码</span>
+              </router-link>
               &emsp;
-              <router-link to="/signup"> 注册账户 </router-link>
+              <router-link to="/signup">
+                <span class="text-color-9">注册账户</span>
+              </router-link>
             </div>
           </div>
         </el-form-item>
@@ -65,7 +69,7 @@
 
 <script>
 import Base from "./_Base.vue";
-import { login } from '../utils/api/users.js';
+import { login } from "../utils/api/users.js";
 
 export default {
   components: {
@@ -96,8 +100,8 @@ export default {
     };
     return {
       loginForm: {
-        pass: "",
-        email: "",
+        pass: "12345678",
+        email: "skyeye977@stu.xjtu.edu.cn",
         remember: false,
       },
       rules: {
@@ -108,6 +112,7 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      console.log("123");
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // API.post("/login", {
@@ -135,11 +140,12 @@ export default {
           login(this.loginForm.email, this.loginForm.pass)
             .then(() => {
               this.$store.dispatch("userLogin", true);
-              this.$router.push('/');
+              localStorage.setItem("Flag", "isLogin");
+              this.$router.push("/");
             })
-            .catch(e => {
-              console.log(e)
-              this.$message.error('登录失败：' + e);
+            .catch((e) => {
+              console.log(e);
+              this.$message.error("登录失败：" + e);
             });
         } else {
           // console.log("error submit!!");
