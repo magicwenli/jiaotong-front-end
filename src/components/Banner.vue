@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:09:40
- * @LastEditTime : 2021-07-16 10:04:02
+ * @LastEditTime : 2021-07-17 14:54:46
  * @Description  :  
  * @FilePath     : /front-end/src/components/Banner.vue
 -->
@@ -15,8 +15,7 @@
           class="flex-none text-color-1 px-4 p-4 h-full"
         >
           <router-link
-            :to="label.url"
-            @click="makeActive(label.id)"
+            :to="'/t/'+label.name"
             class="tracking-wider"
           >
             {{ label.name }}
@@ -28,6 +27,8 @@
 </template>
 
 <script>
+import { getLabels } from "../utils/api/posts";
+
 export default {
   data() {
     return {
@@ -74,6 +75,9 @@ export default {
       console.log(id);
     },
   },
+  computed(){
+    this.labels = getLabels()
+  }
 };
 </script>
 

@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-17 11:34:01
+ * @LastEditTime : 2021-07-17 14:39:56
  * @Description  : 
  * @FilePath     : /front-end/src/components/SinglePost.vue
 -->
@@ -56,7 +56,7 @@
         <router-link
           v-for="label in labels"
           :key="label.lid"
-          to="/"
+          :to="'/t/'+label.labelName"
           class="
             px-2
             bg-color-10

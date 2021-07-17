@@ -1,4 +1,4 @@
-import {request,requestForm} from '../API.vue'
+import { request, requestForm } from '../API.vue'
 
 export function getPostsByTag(page, page_size, tags, orderby) {
   page = page || 1;
