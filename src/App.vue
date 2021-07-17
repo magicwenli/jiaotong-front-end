@@ -28,4 +28,7 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.el-loading-spinner .circular {
+  display: inline;
+}
 </style>

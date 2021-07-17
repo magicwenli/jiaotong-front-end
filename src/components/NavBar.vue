@@ -8,7 +8,7 @@
 
 <template>
   <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-  <div class="sticky top-0 z-10 px-8 pt-2 bg-color-6 shadow-md">
+  <div class="sticky top-0 px-8 pt-2 bg-color-6 shadow-md" style="z-index: 2001">
     <nav class="flex flex-row justify-between -mb-px text-lg font-bold">
       <router-link to="/post" class="ml-2 py-3 no-underline tracking-wide">
         <i class="fa fa-tree"></i>

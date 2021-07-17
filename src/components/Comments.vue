@@ -11,7 +11,7 @@
           <div class="user">
             <el-image class="avatar" :src="emailHash(comment.secretUid)" lazy />
             <div>
-              <div>{{ comment.secretUid == muid ? "洞主" : comment.secretUid }}</div>
+              <div>{{ comment.secretUid == muid ? "洞主" : comment.secretUid.substr(0, 10) }}</div>
               <div>{{ formatTime(comment.postedTime) }}</div>
             </div>
           </div>
@@ -77,14 +77,14 @@ import md5 from "js-md5";
 export default {
   props: {
     pid: Number,
-    muid: String,
-    total: Number
+    muid: String
   },
   data() {
     return {
       comments: [],
       pageSize: 10,
       page: 1,
+      total: 0,
       commentText: "",
       replyFloor: 0,
       replyText: "",
@@ -95,7 +95,9 @@ export default {
     async loadComments() {
       this.loading = true;
       try {
-        this.comments = await getCommentsOfPost(this.pid, this.page, this.pageSize);
+        const { total, list } = await getCommentsOfPost(this.pid, this.page, this.pageSize);
+        this.total = total;
+        this.comments = list;
       } catch (e) {
         this.$message.error("获取评论列表失败：" + e);
       }

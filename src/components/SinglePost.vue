@@ -123,7 +123,7 @@
       </div>
       <div class="pt-4 overflow-hidden">
         <transition name="comments">
-          <Comments v-if="showComments" :pid="pid" :muid="secretId" :total="commentsNum" />
+          <Comments v-if="showComments" :pid="pid" :muid="secretId" />
         </transition>
       </div>
     </el-card>
@@ -241,7 +241,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .comments-enter-active,
 .comments-leave-active {
   transition: all 0.5s;
