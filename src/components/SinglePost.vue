@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 16:35:02
- * @LastEditTime : 2021-07-17 19:28:07
+ * @LastEditTime : 2021-07-18 19:07:51
  * @Description  : 
- * @FilePath     : /front-end/src/components/SinglePost.vue
+ * @FilePath     : \jiaotong-front-end\src\components\SinglePost.vue
 -->
 
 <template>
@@ -216,7 +216,7 @@ export default {
   },
   computed: {
     realImgPath() {
-      return "http://192.168.43.34:8080/post/get_picture?postImage=" + this.postImage;
+      return import.meta.env.VITE_IMG_DESTINATION + this.postImage;
     },
     preImgList() {
       var list = [];

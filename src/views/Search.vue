@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-17 20:40:26
- * @LastEditTime : 2021-07-17 21:15:23
+ * @LastEditTime : 2021-07-18 19:12:57
  * @Description  : 
- * @FilePath     : /front-end/src/views/Search.vue
+ * @FilePath     : \jiaotong-front-end\src\views\Search.vue
 -->
 <template>
   <div class="bg-color-12">
@@ -53,7 +53,10 @@ export default {
     this.refresh();
   },
   watch: {
-    watchTag(tag, pretag) {
+    key(key, prekey) {
+      this.refresh();
+    },
+    tags(tags, pretags) {
       this.refresh();
     },
   },

@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 10:28:20
- * @LastEditTime : 2021-07-16 16:10:46
+ * @LastEditTime : 2021-07-18 19:38:02
  * @Description  : 
- * @FilePath     : /front-end/src/components/NavBar.vue
+ * @FilePath     : \jiaotong-front-end\src\components\NavBar.vue
 -->
 
 <template>
@@ -26,6 +26,13 @@
 </template>
 
 <script>
+// export default{
+//   methods:{
+//     flushCom(){
+//       this.$router.go(0);
+//     }
+//   }
+// }
 </script>
 
 <style>

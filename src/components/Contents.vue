@@ -1,9 +1,9 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-06 14:29:10
- * @LastEditTime : 2021-07-17 20:40:13
+ * @LastEditTime : 2021-07-18 20:08:10
  * @Description  : 
- * @FilePath     : /front-end/src/components/Contents.vue
+ * @FilePath     : \jiaotong-front-end\src\components\Contents.vue
 -->
 
 <template>
@@ -53,8 +53,14 @@ export default {
     this.refresh();
   },
   watch: {
-    watchTag(tag, pretag) {
+    tag(tag, pretag) {
+      console.log(this.tag);
       this.refresh();
+    },
+    $route(to, from) {
+      if (to.path === from.path) {
+        this.refresh();
+      }
     },
   },
   methods: {
@@ -84,7 +90,7 @@ export default {
 
     async onScroll() {
       if (this.posts.length === 0) {
-        // pass 
+        // pass
       } else {
         this.loading = true;
         let page = Math.ceil(this.posts.length / this.pageSize) + 1;
