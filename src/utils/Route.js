@@ -5,9 +5,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import ShuDong from '../views/ShuDong.vue';
 import UserInfo from '../views/UserInfo.vue';
 import Post from '../views/Post.vue';
-import SignUp from '../views/SignUp.vue';
+import SignUp from '../views/Signup.vue';
 import Login from '../views/Login.vue';
 import Search from '../views/Search.vue';
+import FindPass from '../views/FindPass.vue'
 
 
 // 2. 定义一些路由
@@ -37,6 +38,11 @@ const routes = [
     {
         path: '/login',
         component: Login,
+        meta: { isLogin: false }
+    },
+    {
+        path: '/findpass',
+        component: FindPass,
         meta: { isLogin: false }
     },
     {

@@ -44,7 +44,7 @@
               记住我
             </el-checkbox>
             <div class="text-sm font-medium">
-              <router-link to="/">
+              <router-link to="/findpass">
                 <span class="text-color-9"> 忘记密码</span>
               </router-link>
               &emsp;
@@ -100,9 +100,9 @@ export default {
     };
     return {
       loginForm: {
-        pass: "12345678",
-        email: "skyeye977@stu.xjtu.edu.cn",
-        remember: false,
+        pass: "",
+        email: "",
+        remember: true,
       },
       rules: {
         email: [{ validator: validateEmail, trigger: "blur" }],

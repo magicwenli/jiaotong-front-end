@@ -27,12 +27,13 @@
       h3 {
         @apply text-lg font-medium py-1;
       }
-      a {
-          @apply text-color-4;
-      }
 
       button{
           @apply shadow-sm focus:outline-none active:shadow-inner;
+      }
+
+      a{
+        @apply text-color-5 hover:underline;
       }
 
       blockquote{

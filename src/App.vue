@@ -8,14 +8,13 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import SignupCheck from "./components/SignupCheck.vue";
 import Footer from "./components/Footer.vue";
 
 
 // import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  components: { NavBar, SignupCheck,Footer },
+  components: { NavBar,Footer },
 }
 </script>
 
@@ -26,9 +25,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50; */
 }
+
 .el-loading-spinner .circular {
   display: inline;
 }
+
 </style>

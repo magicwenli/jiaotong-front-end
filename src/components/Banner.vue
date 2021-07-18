@@ -16,7 +16,7 @@
         >
           <router-link
             :to="'/t/'+label.labelName"
-            class="tracking-wider"
+            class="tracking-wider text-color-4"
           >
             {{ label.labelName }}
           </router-link>

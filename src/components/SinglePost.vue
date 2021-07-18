@@ -64,7 +64,7 @@
             bg-color-10
             rounded-sm
             ring-2 ring-offset-1 ring-color-10
-            text-sm
+            text-sm text-color-4
           "
         >
           <!-- <span class="text-color-11 text-base font-bold">#</span> -->
@@ -110,7 +110,6 @@
             :checked="favBtnChecked"
             class="flex -mr-4"
           />
-          <!-- <span class="mr-4 text-color-9">&ensp;123</span> -->
         </button>
 
         <button
@@ -216,7 +215,7 @@ export default {
   },
   computed: {
     realImgPath() {
-      return import.meta.env.VITE_IMG_DESTINATION + this.postImage;
+      return this.postImage;
     },
     preImgList() {
       var list = [];

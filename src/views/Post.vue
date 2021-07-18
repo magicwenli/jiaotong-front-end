@@ -135,8 +135,7 @@ function compress(file) {
 export default {
   data() {
     return {
-      textarea2: "\`\`\`dustsdfa\nprint(fff)\n1232144\nfs\n\`\`\`",
-      // textarea2: "",
+      textarea2: "",
       fileList: [],
       compressing: false,
       compressedFile: null,

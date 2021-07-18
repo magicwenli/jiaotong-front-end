@@ -1,23 +1,22 @@
 <!--
  * @Author       : magicwenli
- * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-18 16:33:45
+ * @Date         : 2021-07-08 19:46:02
+ * @LastEditTime : 2021-07-16 09:59:12
  * @Description  : 
- * @FilePath     : /front-end/src/views/Signup.vue
+ * @FilePath     : /front-end/src/components/SignupCheck.vue
 -->
 
-
 <template>
-  <Base>
+<Base>
     <template v-slot:headline>
-      <a class="fas fa-user-plus text-color-1" />&ensp; 注册
+      <a class="far fa-paper-plane text-color-1" />&ensp; 忘记密码？
     </template>
-    <template v-slot:tips> 目前仅接受部分邮箱注册。 </template>
+    <template v-slot:tips> 验证后修改密码 </template>
     <template #default>
       <el-form
-        :model="signupForm"
+        :model="findPassForm"
         :rules="rules"
-        ref="signupForm"
+        ref="findPassForm"
         label-width="100px"
         label-position="top"
         class="mx-2"
@@ -26,7 +25,7 @@
         <el-form-item prop="email" label="注册邮箱">
           <el-input
             type="email"
-            v-model="signupForm.email"
+            v-model="findPassForm.email"
             autocomplete="off"
             prefix-icon="el-icon-message"
           >
@@ -35,7 +34,7 @@
         <el-form-item>
           <el-button
             type="primary"
-            :disabled="signupForm.btnVarCode"
+            :disabled="findPassForm.btnVarCode"
             @click="sendEmail"
             class="w-full"
           >
@@ -43,13 +42,13 @@
           </el-button>
         </el-form-item>
         <el-form-item prop="verCode" label="验证码">
-          <el-input type="text" v-model="signupForm.verCode" autocomplete="off">
+          <el-input type="text" v-model="findPassForm.verCode" autocomplete="off">
           </el-input>
         </el-form-item>
-        <el-form-item prop="pass" label="输入密码">
+        <el-form-item prop="pass" label="新密码">
           <el-input
             type="password"
-            v-model="signupForm.pass"
+            v-model="findPassForm.pass"
             autocomplete="off"
             prefix-icon="el-icon-lock"
           >
@@ -58,25 +57,14 @@
         <el-form-item prop="repass" label="再次输入密码">
           <el-input
             type="password"
-            v-model="signupForm.repass"
+            v-model="findPassForm.repass"
             autocomplete="off"
             prefix-icon="el-icon-lock"
           >
           </el-input>
         </el-form-item>
-        <el-form-item prop="eula">
-          <el-checkbox
-            v-model="signupForm.eula"
-            class="flex items-start justify-between"
-          >
-            我已阅读，并同意
-            <a href="#">
-              <span class="text-color-9">《用户协议》</span>
-            </a>
-          </el-checkbox>
-        </el-form-item>
         <el-form-item style="">
-          <el-button class="w-full pt-12" type="primary" @click="submitRegForm"
+          <el-button class="w-full pt-12" type="primary" @click="submitFindPassForm"
             >提交</el-button
           >
         </el-form-item>
@@ -87,7 +75,7 @@
 
 <script>
 import Base from "./_Base.vue";
-import { register, sendVerCode } from "../utils/api/users.js";
+import { findPassword, sendVerCode } from "../utils/api/users.js";
 
 export default {
   components: {
@@ -100,8 +88,8 @@ export default {
       } else if (value.length < 8) {
         callback(new Error("密码长度应超过8位"));
       } else {
-        if (this.signupForm.pass !== "") {
-          this.$refs.signupForm.validateField("repass");
+        if (this.findPassForm.pass !== "") {
+          this.$refs.findPassForm.validateField("repass");
         }
         callback();
       }
@@ -109,7 +97,7 @@ export default {
     var validatePass2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== this.signupForm.pass) {
+      } else if (value !== this.findPassForm.pass) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -126,21 +114,13 @@ export default {
         if (emailPass) {
           callback(new Error("暂时不接受该类邮箱注册"));
         } else {
-          this.signupForm.btnVarCode = false;
+          this.findPassForm.btnVarCode = false;
           callback();
         }
       }
     };
-    var validateEULA = (rule, value, callback) => {
-      // console.log(value);
-      if (value === false) {
-        callback(new Error("请阅读协议后勾选"));
-      } else {
-        callback();
-      }
-    };
     return {
-      signupForm: {
+      findPassForm: {
         pass: "",
         email: "",
         repass: "",
@@ -152,29 +132,25 @@ export default {
         email: [{ validator: validateEmail, trigger: "blur" }],
         pass: [{ validator: validatePass, trigger: "blur" }],
         repass: [{ validator: validatePass2, trigger: "blur" }],
-        eula: [
-          { required: true },
-          { validator: validateEULA, trigger: "blur" },
-        ],
       },
     };
   },
   methods: {
-    submitRegForm() {
-      this.$refs["signupForm"].validate((valid) => {
+    submitFindPassForm() {
+      this.$refs["findPassForm"].validate((valid) => {
         if (valid) {
-          register(
-            this.signupForm.email,
-            this.signupForm.pass,
-            this.signupForm.verCode
+          findPassword(
+            this.findPassForm.email,
+            this.findPassForm.pass,
+            this.findPassForm.verCode
           )
             .then(() => {
-              this.$message.success("注册成功");
+              this.$message.success("密码已修改");
               this.$router.push("/login");
             })
             .catch((e) => {
               console.log(e);
-              this.$message.error("注册失败：" + e);
+              this.$message.error("发生预料之外的错误：\n" + e);
             });
         } else {
           // this.$message.error("注册失败：" + e);
@@ -183,7 +159,7 @@ export default {
       });
     },
     sendEmail() {
-      sendVerCode(this.signupForm.email)
+      sendVerCode(this.findPassForm.email)
         .then(() => {
           this.$message.success("发送验证码成功, 60秒后可重新发送");
         })
@@ -192,10 +168,10 @@ export default {
           this.$message.error("发送失败：" + e);
         });
 
-      this.signupForm.btnVarCode = true;
+      this.findPassForm.btnVarCode = true;
 
       setTimeout(() => {
-        this.signupForm.btnVarCode = false;
+        this.findPassForm.btnVarCode = false;
       }, 60);
     },
   },

@@ -1,4 +1,4 @@
-import {request} from '../API.vue'
+import { request } from '../API.vue'
 
 export function register(email, password, verCode) {
   return request({
@@ -32,7 +32,7 @@ export function updatePassword(oldPassword, newPassword) {
   })
 }
 
-export function findPassword(email, verCode, newPassword) {
+export function findPassword(email, newPassword, verCode) {
   return request({
     url: '/users/find_password',
     method: 'post',

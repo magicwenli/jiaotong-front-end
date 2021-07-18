@@ -32,7 +32,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: "",
+	      target: "http://jiaotong.fashioner.pub/api",
         changeOrigin: true,
         rewrite: p => p.replace(/^\/api/, '')
       }
