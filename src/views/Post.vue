@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-09 09:30:22
- * @LastEditTime : 2021-07-17 17:38:41
+ * @LastEditTime : 2021-07-17 21:59:23
  * @Description  : 
  * @FilePath     : /front-end/src/views/Post.vue
 -->
@@ -135,7 +135,7 @@ function compress(file) {
 export default {
   data() {
     return {
-      textarea2: "$a=\\frac{1}{12}$",
+      textarea2: "\`\`\`dustsdfa\nprint(fff)\n1232144\nfs\n\`\`\`",
       // textarea2: "",
       fileList: [],
       compressing: false,

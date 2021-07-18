@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-17 16:06:17
+ * @LastEditTime : 2021-07-18 16:33:45
  * @Description  : 
  * @FilePath     : /front-end/src/views/Signup.vue
 -->
@@ -20,7 +20,7 @@
         ref="signupForm"
         label-width="100px"
         label-position="top"
-        class="mx-2 space-y-2"
+        class="mx-2"
         hide-required-asterisk
       >
         <el-form-item prop="email" label="注册邮箱">
@@ -37,6 +37,7 @@
             type="primary"
             :disabled="signupForm.btnVarCode"
             @click="sendEmail"
+            class="w-full"
           >
             发送验证码
           </el-button>
@@ -63,20 +64,19 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item>
-          <div class="flex items-center justify-between">
-            <el-checkbox v-model:checked="signupForm.remember">
-              我已阅读，并同意<a href="#"
-                ><span class="text-color-9">《用户协议》</span></a
-              >
-            </el-checkbox>
-          </div>
+        <el-form-item prop="eula">
+          <el-checkbox
+            v-model="signupForm.eula"
+            class="flex items-start justify-between"
+          >
+            我已阅读，并同意
+            <a href="#">
+              <span class="text-color-9">《用户协议》</span>
+            </a>
+          </el-checkbox>
         </el-form-item>
-        <el-form-item>
-          <el-button
-            class="w-full"
-            type="primary"
-            @click="submitForm('signupForm')"
+        <el-form-item style="">
+          <el-button class="w-full pt-12" type="primary" @click="submitRegForm"
             >提交</el-button
           >
         </el-form-item>
@@ -100,8 +100,8 @@ export default {
       } else if (value.length < 8) {
         callback(new Error("密码长度应超过8位"));
       } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
+        if (this.signupForm.pass !== "") {
+          this.$refs.signupForm.validateField("repass");
         }
         callback();
       }
@@ -109,7 +109,7 @@ export default {
     var validatePass2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
-      } else if (value !== this.ruleForm.pass) {
+      } else if (value !== this.signupForm.pass) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -131,6 +131,14 @@ export default {
         }
       }
     };
+    var validateEULA = (rule, value, callback) => {
+      // console.log(value);
+      if (value === false) {
+        callback(new Error("请阅读协议后勾选"));
+      } else {
+        callback();
+      }
+    };
     return {
       signupForm: {
         pass: "12345678",
@@ -138,20 +146,22 @@ export default {
         repass: "12345678",
         verCode: "ohvRRvb2Se",
         btnVarCode: true,
-        remember: false,
+        eula: false,
       },
       rules: {
         email: [{ validator: validateEmail, trigger: "blur" }],
         pass: [{ validator: validatePass, trigger: "blur" }],
         repass: [{ validator: validatePass2, trigger: "blur" }],
+        eula: [
+          { required: true },
+          { validator: validateEULA, trigger: "blur" },
+        ],
       },
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        console.log("123");
-
+    submitRegForm() {
+      this.$refs["signupForm"].validate((valid) => {
         if (valid) {
           register(
             this.signupForm.email,
@@ -167,7 +177,7 @@ export default {
               this.$message.error("注册失败：" + e);
             });
         } else {
-          this.$message.error("注册失败：" + e);
+          // this.$message.error("注册失败：" + e);
           return false;
         }
       });

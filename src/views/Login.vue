@@ -1,7 +1,7 @@
 <!--
  * @Author       : magicwenli
  * @Date         : 2021-07-08 15:59:03
- * @LastEditTime : 2021-07-17 16:09:30
+ * @LastEditTime : 2021-07-18 15:43:24
  * @Description  : 
  * @FilePath     : /front-end/src/views/Login.vue
 -->
@@ -112,7 +112,6 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      console.log("123");
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // API.post("/login", {
