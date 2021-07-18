@@ -32,4 +32,7 @@ export default {
   display: inline;
 }
 
+.el-image-viewer__wrapper {
+  z-index: 2001 !important;
+}
 </style>

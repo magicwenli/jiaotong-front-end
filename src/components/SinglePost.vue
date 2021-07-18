@@ -215,11 +215,11 @@ export default {
   },
   computed: {
     realImgPath() {
-      return this.postImage;
+      return import.meta.env.VITE_API_BASE_URL + this.postImage;
     },
     preImgList() {
       var list = [];
-      list.push(this.postImage);
+      list.push(this.realImgPath);
       // console.log(list);
       return list;
     },

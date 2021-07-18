@@ -32,9 +32,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-	      target: "http://jiaotong.fashioner.pub/api",
-        changeOrigin: true,
-        rewrite: p => p.replace(/^\/api/, '')
+	      target: "https://jiaotong.fashioner.pub",
+        changeOrigin: true
       }
     },
     host: '0.0.0.0'

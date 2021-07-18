@@ -39,3 +39,17 @@ export function findPassword(email, newPassword, verCode) {
     data: { email, verCode, newPassword }
   })
 }
+
+export function getLoginStatus() {
+  return request({
+    url: '/users/has_login',
+    method: 'get'
+  })
+}
+
+export function logout() {
+  return request({
+    url: '/users/log_off',
+    method: 'post'
+  })
+}

@@ -72,15 +72,23 @@
 <script>
 import { ElMessage } from "element-plus";
 import { getLabels, searchPosts } from "../utils/api/posts";
+import { logout } from '../utils/api/users';
 
 export default {
   components: { ElMessage },
   methods: {
-    logOut() {
-      console.log("log out");
-      localStorage.removeItem("Flag");
-      ElMessage({ showClose: true, message: "退出登录" });
-      this.$router.push("/");
+    async logOut() {
+      // console.log("log out");
+      // localStorage.removeItem("Flag");
+      try {
+        await logout()
+      } catch (e) {
+        this.$message.error('登出失败：' + e)
+        return
+      }
+      this.$store.dispatch('login/userLogin', false);
+      // ElMessage({ showClose: true, message: "退出登录" });
+      this.$router.push("/login");
     },
     toFavorite() {
       console.log("to favorite");

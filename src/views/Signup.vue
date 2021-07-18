@@ -170,7 +170,8 @@ export default {
           )
             .then(() => {
               this.$message.success("注册成功");
-              this.$router.push("/login");
+              this.$store.dispatch("login/userLogin", true);
+              this.$router.push("/");
             })
             .catch((e) => {
               console.log(e);

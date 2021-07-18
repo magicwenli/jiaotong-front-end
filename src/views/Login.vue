@@ -138,8 +138,8 @@ export default {
           // });
           login(this.loginForm.email, this.loginForm.pass)
             .then(() => {
-              this.$store.dispatch("userLogin", true);
-              localStorage.setItem("Flag", "isLogin");
+              this.$store.dispatch("login/userLogin", true);
+              // localStorage.setItem("Flag", "isLogin");
               this.$router.push("/");
             })
             .catch((e) => {
