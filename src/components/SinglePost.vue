@@ -50,7 +50,6 @@
         <div
           class="text-justify pt-2"
           v-html="postContent"
-          style="text-indent: 2em"
         ></div>
       </div>
       <div class="flex space-x-4 pt-4 justify-items-start rounded-xl">
@@ -117,12 +116,12 @@
           @click="showComments = !showComments"
         >
           <i class="fas fa-reply opacity-50"></i>
-          <span class="text-color-9">&ensp;{{ commentsNum }}</span>
+          <span class="text-color-9">&ensp;{{ finalCommentsNum }}</span>
         </button>
       </div>
       <div class="pt-4 overflow-hidden">
         <transition name="comments">
-          <Comments v-if="showComments" :pid="pid" :muid="secretId" />
+          <Comments v-if="showComments" :pid="pid" :muid="secretId" @count="realCommentsNum = $event" />
         </transition>
       </div>
     </el-card>
@@ -208,6 +207,7 @@ export default {
       likeBtnChecked: false,
       favBtnChecked: false,
       likes: this.postLike,
+      realCommentsNum: null,
     };
   },
   mounted() {
@@ -235,6 +235,9 @@ export default {
       } else {
         return true;
       }
+    },
+    finalCommentsNum() {
+      return this.realCommentsNum == null ? this.commentsNum : this.realCommentsNum;
     },
   },
 };

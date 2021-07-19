@@ -98,6 +98,7 @@ export default {
         const { total, list } = await getCommentsOfPost(this.pid, this.page, this.pageSize);
         this.total = total;
         this.comments = list;
+        this.$emit('count', total);
       } catch (e) {
         this.$message.error("获取评论列表失败：" + e);
       }

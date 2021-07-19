@@ -9,6 +9,9 @@
 <script>
 import axios from 'axios';
 import qs from 'qs';
+import router from './Route';
+import store from '../store';
+import { ElMessage } from 'element-plus';
 
 const _request = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -21,6 +24,11 @@ _request.interceptors.response.use(res => {
     if (res.data.state == 200) {
         return res.data.data;
     } else {
+        if (res.data.state == 403) {
+            ElMessage({ showClose: true, message: '登录已失效，请重新登录' });
+            store.dispatch('login/userLogin', false);
+            router.push('/login');
+        }
         return Promise.reject(res.data.message);
     }
 }, () => Promise.reject('网络错误'));
