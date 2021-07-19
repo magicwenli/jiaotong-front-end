@@ -107,6 +107,7 @@ export default {
     async turn(page) {
       this.page = page;
       await this.loadComments();
+      this.$el.parentElement.scrollIntoView();
     },
     formatTime(time) {
       return formatTime(new Date(time).getTime() / 1000);

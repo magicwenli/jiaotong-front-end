@@ -31,7 +31,12 @@ _request.interceptors.response.use(res => {
         }
         return Promise.reject(res.data.message);
     }
-}, () => Promise.reject('网络错误'));
+}, e => {
+    if (e.response) {
+        return Promise.reject('服务器响应错误状态码：' + e.response.status);
+    }
+    return Promise.reject('网络错误');
+});
 
 export function request(opt) {
     if (opt.data != null) {
